@@ -1,1 +1,32 @@
+QUES: Sort an array of 1's, 0's and 2's without using extra space or sorting algo.
+                 
+INPUT - [2,0,2,1,1,0]     
+OUTPUT - [0,0,1,1,2,2]
 
+                                                                BRUTE FORCE
+                                         Simply sort the array with T.C - O(nLogn) and S.C - O(1)
+                                         
+                                                               BETTER FORCE
+                                          Traverse the loop and then count for each 0,1,2 . 
+                                          Then run the loop to assign the value in correct order.
+                                          T.C - O(2n) and S.C - O(1)
+                                          
+                                                              OPTIMAL FORCE
+                                                              
+                                          Using Dutch National Flag Algorithm. with three pointers ---> low,mid,high
+Three conditions : when the mid points at 0,1,2
+
+Case 1 :  when mid at 0
+          swap mid and low
+          low++ , mid+
+Case 2 : when mid at 1
+         mid++
+Case 3: when mid at 2
+          swap mid and high
+          high--
+          
+ #JAVA CODE
+ 
+ 
+                                          
+                                        
