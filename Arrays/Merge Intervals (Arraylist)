@@ -1,1 +1,66 @@
+Ques:  Given a set of non-overlapping intervals, insert a new interval into the intervals (merge if necessary). 
+source - Interviewbit
+ REturn type = Intervals sorted order
+ 
+                      EDGE CASES :- 
+                        CASE 1
+                        when toinsert.end < cuurent.start = non overlapping
+                        CASE 2
+                        when toInsert.start>current.end = non overlapping
+                        CASE 3
+                        Toinsert.start<Current.end = overlapping 
+                        starting time of one is crossing the end time of another.
+                       
+  *JAVA CODE*
 
+public class Solution {
+    public ArrayList<Interval> insert(ArrayList<Interval> intervals, Interval newInterval) {
+ 
+         //base case
+         if(intervals==null)
+         {
+            intervals=new ArrayList<Interval>();
+            intervals.add(newInterval);
+            return intervals;
+         
+         }
+         else if(intervals.size()==0)
+         {
+             intervals.add(newInterval);
+             return intervals;
+         }
+          int i=0;
+          Interval toinsert= newInterval;
+
+          while(i<intervals.size())
+          {
+             Interval current = intervals.get(i);
+             if(current.end<toinsert.start)
+               {
+                   i++;
+                   continue;
+
+               }
+               else if(current.start>toinsert.end)
+               {
+                   intervals.add(i,toinsert);
+                   break;
+
+               }
+             //main case - overlapping
+             else{
+                
+                toinsert.end= Math.max(current.end,toinsert.end);
+                toinsert.start=Math.min(current.start,toinsert.start);
+                intervals.remove(i);
+             }
+         }
+         if(i==intervals.size())
+         intervals.add(toinsert);
+
+         return intervals;
+
+
+
+    }
+}
