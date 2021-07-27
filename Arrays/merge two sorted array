@@ -1,1 +1,63 @@
+QUESTION- Given an array of intervals where intervals[i] = [starti, endi], merge all overlapping intervals,
+and return an array of the non-overlapping intervals that cover all the intervals in the input.
 
+INPUT -
+intervals = [[1,3],[2,6],[8,10],[15,18]]
+OUTPUT =
+[[1,6],[8,10],[15,18]]
+
+
+Optimal force
+The idea is to sort the intervals by their starting points. Then, we take the first interval and compare its end with the next intervals starts. As long as they overlap, 
+we update the end to be the max end of the overlapping intervals. Once we find a non overlapping interval, we can add the previous "extended" interval and start over.
+
+1. Sort interval
+2. first interval(end) compare to next interval (start)
+3. Add to datastructure and replace first by next non overlapping interval.
+4. Repeat step 2.
+
+Time complexity = O(NlogN) Sorting + O(N) loop = O(NLOGN)
+Space complexity = W.C O(N)
+
+
+<Java code >
+class Solution {
+    public int[][] merge(int[][] intervals) {
+        //NEW Arraylist 
+        List<int[]> res = new ArrayList<>();
+        
+        //if interval is empty
+        if(intervals.length==0)
+            return intervals;
+        
+        //Sorting the intervas
+        Arrays.sort(intervals,(a,b)->a[0]-b[0]);
+        
+        //pointers for first intervals
+        int start = intervals[0][0];
+        int end = intervals [0][1];
+        
+        //loop for checking overlapping and disjoint inervals
+        for(int []i: intervals)
+        {
+            if(i[0]<=end)
+                end = Math.max(end,i[1]); //overlapping intervals
+            else
+            {
+                res.add(new int[]{start,end}); //adding the merged interval to new ds
+                //updating or replacing with next interval
+                start = i[0];
+                end=i[1];
+                
+            }
+        }
+        
+        //for the last interval add to ds
+        res.add(new int[]{start,end});
+        
+        return res.toArray(new int[0][]);
+    
+            
+        
+    }
+}
