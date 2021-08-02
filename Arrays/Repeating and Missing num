@@ -1,1 +1,56 @@
+QUES = Given an unsorted array Arr of size N of positive integers. One number 'A' from set {1, 2, …N} 
+is missing and one number 'B' occurs twice in array. Find these two numbers.
 
+Input:
+N = 2
+Arr[] = {2, 2}
+Output: 2 1
+
+Better force : using Hashing method . the index with value =2 will be the repeating num. and index with valye =0 will be the missing num.
+T.C = O(n)+O(n) =O(2n)
+S.C= O(n)
+
+JAVA CODE //
+
+class Solve {
+    int[] findTwoElement(int arr[], int n) {
+        int a[]= new int[n+1];
+         int []res = new int[2];
+        
+       
+        for(int i=0;i<n;i++)
+        {
+            a[arr[i]]++;  
+        }
+        for(int i=1;i<=n;i++)
+        {
+            if(a[i]==2)
+               res[0]=i;
+            if(a[i]==0)
+               res[1]=i;
+              
+        }
+     return res;
+        
+        
+    }
+}
+
+
+OPTIMAL FORCE NO.1- using equations and modifing the array.
+                 X-Y=S Let x be the missing and y be the repeating element
+                 X^2 -Y^2 =S^2 here we can get eq: X+Y=NUM
+                 solve these two eq and get X,Y
+                 
+OPTIMAL FORCE NO.2 - XOR PROPERTY 
+                    1.XOR all a[i] =x
+                    2.x^(1^2^......n)
+                    3.X^Y=num
+                    4.Separate in 2 basket
+                    5.Separate (1....n) in 2 basket
+                    6.XOR both basket to find number
+                    
+        
+        
+                 
+                 
