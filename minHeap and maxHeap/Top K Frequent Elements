@@ -1,1 +1,52 @@
+Given an integer array nums and an integer k, return the k most frequent elements. You may return the answer in any order.
 
+ Input: nums = [1,1,1,2,2,3], k = 2
+Output: [1,2]
+
+Using MinHeap!!
+T.C = O(NLOGK)
+
+1.use hashmap for counting the freq. of numbers
+2.Minheap on the basis of map.value
+3.if(size>k)-- poll
+4.return the heap
+
+
+JAVA CODE :-
+
+class solution{
+
+public int[] topKfrequent(int []nums,int k)
+{    int n= nums.length;
+        int index=0;
+         if (k == nums.length) {
+            return nums;
+        }
+       //creating a map to calculate the freq of each element
+        Map<Integer,Integer> numfreqmap= new HashMap<>();
+        for(int i:nums)
+            numfreqmap.put(i,numfreqmap.getOrDefault(i,0)+1);
+        
+    //initialising minHeap with map
+        PriorityQueue<Map.Entry<Integer,Integer>> minheap= new PriorityQueue<Map.Entry<Integer,Integer>>((e1,e2)->e1.getValue()-e2.getValue());
+        
+        //minheap comparison
+        
+        for(Map.Entry<Integer,Integer>entry :numfreqmap.entrySet()){
+          //top k frequent  
+            minheap.add(entry);
+            if(minheap.size()>k)
+                minheap.poll();
+            }
+        
+        //create a list of top k numbers
+        int [] topNum =new int[k];
+        while(!minheap.isEmpty())
+        {
+            topNum[index]=minheap.poll().getKey();
+            index++;
+        }
+      return topNum;
+    }
+    
+}
