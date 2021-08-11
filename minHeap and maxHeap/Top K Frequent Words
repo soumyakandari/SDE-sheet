@@ -1,1 +1,45 @@
+Given an array of strings words and an integer k, return the k most frequent strings
+Return the answer sorted by the frequency from highest to lowest. Sort the words with the same frequency by their lexicographical order.
 
+Input: words = ["i","love","leetcode","i","love","coding"], k = 2
+Output: ["i","love"]
+Explanation: "i" and "love" are the two most frequent words.
+Note that "i" comes before "love" due to a lower alphabetical order.
+
+
+
+//USING MINHEAP AND HASHMAP
+T.C = O(NLOGk)
+S.C=O(N)
+
+
+JAVA CODE--  1.keep a count of each word in a HashMap and then insert in a Priority Queue.
+             2.While inserting in pq, if the count of two words is same then insert based on string compare of the keys.
+
+
+class Solution {
+    public List<String> topKFrequent(String[] words, int k) {
+        //hashmap
+        Map<String,Integer> wordmap= new HashMap<>();
+        for(String n: words)
+            wordmap.put(n,wordmap.getOrDefault(n,0)+1);
+        
+        //minheap 
+        PriorityQueue<Map.Entry<String,Integer>> minHeap = new PriorityQueue<>((a,b) -> a.getValue()==b.getValue() ? b.getKey().compareTo(a.getKey()) : a.getValue()-b.getValue());
+        
+        for(Map.Entry<String,Integer>entry :wordmap.entrySet()){
+            minHeap.offer(entry);
+            if(minHeap.size()>k)
+                minHeap.poll();
+            
+        }
+        List<String> result =new ArrayList<>(k);
+        while(!minHeap.isEmpty())
+        {
+            result.add(0,minHeap.poll().getKey());
+        }
+        return result;
+    }
+}
+
+ 
