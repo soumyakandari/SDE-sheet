@@ -1,0 +1,33 @@
+Given a string s, sort it in decreasing order based on the frequency of characters, and return the sorted string.
+
+Input: s = "tree"
+Output: "eert"
+
+USING MAX HEAP!!
+
+JAVA CODE:-
+class Solution {
+    public String frequencySort(String s) {
+        //Hashmap for frequency of characters
+        Map<Character,Integer> map=new HashMap<>();
+        for (char c : s.toCharArray()) 
+            map.put(c, map.getOrDefault(c, 0) + 1);
+            
+        
+        //maxheap with map
+        PriorityQueue<Map.Entry<Character,Integer>> maxHeap = new PriorityQueue<Map.Entry<Character,Integer>>((e1,e2)->e2.getValue()-e1.getValue());
+       //adding the freq in maxheap 
+        for(Map.Entry<Character,Integer> entry :map.entrySet())
+            maxHeap.add(entry);
+        
+      //converting the maxheap to string
+        String res="";
+        while(!maxHeap.isEmpty())
+            
+        {   Map.Entry<Character,Integer>ch= maxHeap.poll();
+            for(int i=0;i<ch.getValue();i++)//add the char times its freq
+                   res=res+ch.getKey();
+        }
+        return res;
+    }
+}
