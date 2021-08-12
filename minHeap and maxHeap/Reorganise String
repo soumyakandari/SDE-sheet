@@ -2,3 +2,21 @@ ASKED IN PHARMEASY INTERVIEW // LEETCODE QIES 767
 
 Given a string s, rearrange the characters of s so that any two adjacent characters are not the same.
 Return any possible rearrangement of s or return "" if not possible.
+
+Input: s = "aab"
+Output: "aba"
+
+<BRUTE FORCE>
+
+1.Hashmap with freq of all characters
+2. sort map in desc order
+3.top element --> add in result && freq --;
+4. sort map in desc
+5. check if prev!=currchar ,then step 3.
+6. check if reorganise possible: if(map.size()!=null &&map[curr]>0)
+7.else return result;
+
+T.C= O(nlogn)sort
+
+<OPTIMAL FORCE>
+Using max heap + hashmap
