@@ -20,3 +20,51 @@ T.C= O(nlogn)sort
 
 <OPTIMAL FORCE>
 Using max heap + hashmap
+
+1.HASH MAP FREQ
+2.Add all map entry into maxheap
+3.prev freq && prevchar= null;//later on changed
+4.currfreq && currchar = maxheap.poll();
+5.result.append(currchar);
+6.check= if(prevchar!=null && prevfreq>0)maxheap.add(prevchar,prevfreq)
+7.prevfreq =currfreq-1 , prevchar=currchar;
+8.condition -> if resultsize==givenstring size , return result
+
+
+JAVA CODE:-
+class Solution {
+    public String reorganizeString(String s) {
+        //hashmap to count freq
+        Map<Character,Integer> hash_map= new HashMap<>();
+        for(char ch:s.toCharArray())
+            hash_map.put(ch,hash_map.getOrDefault(ch,0)+1);
+        
+    //max heap with map
+        PriorityQueue<Map.Entry<Character,Integer>> maxheap= new PriorityQueue<>((e1,e2)->e2.getValue()-e1.getValue());
+        //add all values of map into heap
+        maxheap.addAll(hash_map.entrySet());
+        //prevchar and prevfreq
+        Map.Entry<Character,Integer> prev=null;
+        String result="";
+        while(!maxheap.isEmpty())
+        {
+            //current char and freq
+            Map.Entry<Character,Integer> entry= maxheap.poll();
+            char currchar = entry.getKey();
+            result=result+currchar;
+            if(prev!=null && prev.getValue()>0)
+            {
+                maxheap.add(prev);//adding the updated prev into heap
+            }
+            prev= entry; //updating the prev 
+            prev.setValue(prev.getValue()-1);
+            
+            
+        }//CONDITION
+        if(result.length()==s.length())
+        return result;
+        
+        else
+             return "";
+    }
+}
