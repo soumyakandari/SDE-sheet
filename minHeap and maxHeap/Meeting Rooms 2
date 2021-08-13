@@ -4,3 +4,31 @@ For example,
 Given [[0, 30],[5, 10],[15, 20]],
 return 2.
 
+USING MIN HEAP AND SORTING THE INTERVAL
+1.Sort the meeting acc to the start time.
+2.add the first meeting to the minheap.
+3.check the meeting[start]>minheap[end] == add the meeting to heap.
+4. room will be updated, room will be the max(room,minheap.size())
+
+JAVA CODE:-
+
+public int minMeetingRooms(int[][] intervals)
+{  int rooms=0;
+   //to sort the 2D array in asc order of start of meeting
+   Arrays.sort(intervals,(a,b)->Integer.compare(a[0],b[0]);
+   
+   //minheap on the basis of end time 
+   PriorityQueue<int[]>minheap = new PriorityQueue<>((a,b)->a[1]-b[1]);
+   
+   for(int[] interval:intervals)
+  {
+     while(!minheap.isEmpty() &&interval[0]>=minheap.peek()[1])
+     minheap.poll();
+     
+     minheap.offer(interval);
+     rooms=Math.max(rooms,minheap.size());
+     
+   }
+   return rooms;
+}
+  
