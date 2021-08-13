@@ -49,7 +49,7 @@ public point(int x,int y ,int distance)
       int[][] res= new int[k][2];
       int i=0;
       while(!maxheap.isEmpty())
-      {  point p= maxheap.poll();
+      {  point p= maxheap.poll();  //storing the heap value into object p;
          res[i][0]= p.x;
          res[i][1]= p.y;
          i++;
