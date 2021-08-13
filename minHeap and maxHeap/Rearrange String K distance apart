@@ -4,3 +4,57 @@ s = "aabbcc", k = 3
 
 Result: "abcabc"
 
+USING HASHMAP, MAXHEAP AND QUEUE
+1.hashmap for freq of characters in string
+2.add the hashmap to maxheap
+3.add the maxheap.poll() to result string and 
+4.updated frq with char to queue if freq!=0
+5. if queue size==k then pop the queue and add that to maxheap
+
+JAVA CODE=
+
+class solution{
+	public static String rearrangekdistance(String s,int k)
+	{  String res="";
+	    //hashmap to count the freq of Character
+	    Map<Character,Integer> hash_map= new HashMap<>();
+	    for(char ch:s.toCharArray())
+	      hash_map.put(ch,hash_map.getOrDefault(ch,0)+1);
+	      
+	    //max heap 
+	    PriorityQueue<Map.Entry<Character,Integer>> maxheap= new  PriorityQueue<>((a,b)->b.getValue()-a.getValue());
+	   //ADD ALL THE HASHMAP VAL INTO heap
+	   maxheap.addAll(hash_map.entrySet());
+	   
+	   //queue to have k elements 
+	   Queue<Map.Entry<Character,Integer>> queue
+            = new PriorityQueue<>(k);
+	   
+	   while(res.length()!=s.length())
+	   {   Map.Entry<Character,Integer> entry = maxheap.poll();
+	       //add character to result string
+	       res=res+entry.getKey();
+	       //update the Characterfreq
+	         entry.setValue(entry.getValue()-1);
+	      
+	         
+	         if(queue.size()==k)
+	         {
+	             maxheap.add(queue.poll());
+	         }
+	            
+	         //adding the new entry to Queue
+	         if(entry.getValue()!=0)
+	            queue.add(entry);
+	         
+	   }
+	   //length of result
+	   int n= res.length();
+	   if(res.charAt[n-1]==res.charAt[n-2]) //string can't be reorganised
+	      return "";
+	    else 
+	      return res;
+	}
+}
+
+
