@@ -1,3 +1,37 @@
 Given an integer numRows, return the first numRows of Pascal's triangle.
 Input: numRows = 5
 Output: [[1],[1,1],[1,2,1],[1,3,3,1],[1,4,6,4,1]]
+
+TYPE1: PRINT WHOLE TRIANGLE 
+        T.C=O(N^2) 
+        S.C=O(N^2)
+
+1. first and last column always=1;
+2.n col=nrows
+3. value at Row and col r-1cc-1
+
+JAVA CODE:
+class Solution {
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> res= new ArrayList<List<Integer>>();
+        List<Integer> row,pre=null;
+        for(int i=0;i<numRows;i++)
+        {
+            //initialising the row array
+            row= new ArrayList<Integer>();
+            for(int j=0;j<=i;j++)
+            {
+                //putting pascal val into row elements
+                if(j==0 ||j==i)//first or last column
+                  row.add(1);
+                else
+                    row.add(pre.get(j-1)+pre.get(j));//adding the prev two elements
+            }
+                pre=  row;//to store prev value at index
+                res.add(row);
+        }
+        return res;
+    }
+}
+
+TYPE 2: 
