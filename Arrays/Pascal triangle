@@ -35,3 +35,30 @@ class Solution {
 }
 
 TYPE 2: 
+Given an integer rowIndex, return the rowIndexth (0-indexed) row of the Pascal's triangle.
+Input: rowIndex = 3
+Output: [1,3,3,1]
+
+Based on rules: 
+row k of Pascal's Triangle:
+
+[C(k,0), C(k,1), ..., C(k, k-1), C(k, k)]
+and
+C[k,i] = C[k,i-1]*(k-i+1)/i
+
+T.C=O(n)
+
+JAVA CODE:=
+ public class Solution {
+        public List<Integer> getRow(int rowIndex) {
+            Integer[] rowList = new Integer[rowIndex+1];
+            rowList[0] = 1;
+            for(int i=1; i<rowList.length;i++) {
+                rowList[i] = (int)((long)rowList[i-1]*(rowIndex-(i-1))/(i));
+            }
+            return Arrays.asList(rowList);
+        }
+    }
+    
+    
+    
