@@ -1,1 +1,38 @@
 SELECTION SORT -
+By finding the min element from the unsorted part and putting it at the beginning
+The algorithm maintains two subarrays in a given array.
+1) The subarray which is already sorted. 
+2) Remaining subarray which is unsorted.
+
+OBSERVATIONS:-
+1. after 1st pass, we are placing the smallest element at index0
+2. afer 2nd pass, we are placing the smallest 2 element at first 2 places
+3.after kth pass, we are placing the smallestk elements at the first kth place
+
+no of pass=n-1
+//AFTER 1ST PASS
+64 25 12 22 11 ->11 25 12 22 64 
+//POSITION SWAP B/W 64 AND 11
+
+T.C=O(N^2)
+S.C=O(1)
+
+JAVA CODE:=
+
+void selectionSort(int arr[],int n)
+{
+  for(int i=0;i<n-1;i++)
+   {  
+      int min=i;
+      for(int j=i+1;j<n;j++)
+      { 
+         //find the min element
+         if(arr[j]<arr[min])
+            min=j;
+          //swap smallest element with first element
+           int t=arr[min];
+           arr[min]= arr[i];
+           arr[i]=t;
+        }
+     }
+  }
