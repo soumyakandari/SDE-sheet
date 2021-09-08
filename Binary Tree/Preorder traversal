@@ -1,1 +1,26 @@
+PRE ORDER TRAVERSAL  = N L R
+Input: root = [1,null,2,3]
+Output: [1,2,3]
 
+JAVA CODE-
+class Solution {
+    public List<Integer> preorderTraversal(TreeNode root) {
+        List<Integer> a= new ArrayList<>();
+        //NLR
+        a=preorder(root,a);
+        return a;
+        
+    }
+    static List<Integer> preorder(TreeNode root,List<Integer>a)
+    {
+        if(root==null)
+            return a;
+        a.add(root.val);
+        preorder(root.left,a);
+        preorder(root.right,a);
+        
+        return a;
+        
+        
+    }
+}
