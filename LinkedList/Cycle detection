@@ -3,7 +3,35 @@ Input: head = [3,2,0,-4], pos = 1
 Output: true
 Explanation: There is a cycle in the linked list, where the tail connects to the 1st node (0-indexed).
 
-#USING FLOYD CYCLE DETECTION ALGORITHM
+
+#BRUTE FORCE
+USING HASHSET
+T.C-O(N)
+S.C-O(N)
+
+JAVA CODE-
+class Solution {
+    //Function to check if the linked list has a loop.
+    public static boolean detectLoop(Node head){
+        // hashset method
+        
+        HashSet<Node> s = new HashSet<>();
+        Node temp=head;
+        while(temp!=null)
+        {
+            if(s.contains(temp))
+              return true;
+              s.add(temp);
+              temp=temp.next;
+            
+        }
+        return false;
+    }
+}
+
+
+#OPTIMAL FORCE
+USING FLOYD CYCLE DETECTION ALGORITHM
 1.use two pointers, slow and fast
 2. slow moves 1 step and fast moves 2 step
 3. if at any point slow==fast , then linkedList is cyclic
