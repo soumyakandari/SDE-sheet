@@ -8,11 +8,12 @@ T.C- O(NLOGM)
 S.C-O(1)
 
 ALGO-
-1.
-
-
-
-
+1.we can apply binary search in this because of monotonically increasing patter
+[1---------------m]
+2.assign two pointers , low=1 and high= m
+3. find mid=low+high/2
+4.check if(mid*mid*)>9 then the range --> [1------mid]
+5.repeat until mid*mid==9 
 
 
 JAVA CODE-
