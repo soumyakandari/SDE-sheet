@@ -31,3 +31,43 @@ public class Solution {
         return false;
     }
 }
+
+
+#FIND THE INDEX AT WHICH CYCLE IS FORM'
+USING FLOYD ALGO +
+1. Keep the slow pointer at its position
+2. assign fast =head
+3. move both the pointers by 1 step
+4. index where slow==fast, cycle index
+5. return slow
+
+
+JAVA CODE-
+public class Solution {
+    public ListNode detectCycle(ListNode head) {
+        //USING FLOYD DETECTION ALGO
+        ListNode slow= head;
+        ListNode fast=head;
+        ListNode temp=head;
+        
+        //detect whether the LL is cyclic or not
+        while(fast!=null &&fast.next!=null)
+        {
+           slow=slow.next; //1 STEP
+            fast=fast.next.next; //2 STEP
+            
+            if(slow==fast)
+            {
+                while(temp!=slow)
+                {
+                    temp=temp.next;//1 STEP
+                    slow=slow.next;//1 STEP
+                    
+                }
+                return slow; // CYCLE INDEX
+             }
+        }
+        return null;
+    }
+   }
+
