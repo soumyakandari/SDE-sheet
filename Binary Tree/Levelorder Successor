@@ -1,0 +1,31 @@
+LEVELORDER SUCCESSOR - node that appears right next to the given node in binary tree
+
+T.C-O(N)
+S.C-O(N)
+algo-
+1. If the queue.poll()==key
+2.then the next stored val in queue is the ans
+
+JAVA CODE-
+public static node levelordersuccessor(Node root, int key)
+  {
+     if(root==null)
+        return null;
+     Queue<Node> queue= new LinkedList<>();
+     queue.add(root);
+     while(!queue.isEmpty())
+     {
+       Node current = queue.poll();
+       if(current.left!=null)
+          queue.add(current.left);
+       if(current.right!=null)
+          queue.add(current.right);
+          
+          //check if its equal to key
+          if(current.data==key)
+            break;
+       }
+       
+       
+       return queue.poll();
+   }
