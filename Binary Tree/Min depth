@@ -1,0 +1,43 @@
+Given a binary tree, find its minimum depth.
+
+The minimum depth is the number of nodes along the shortest path from the root node down to the nearest leaf node.
+
+Note: A leaf is a node with no children.
+
+Input: root = [3,9,20,null,null,15,7]
+Output: 2
+
+Algo-
+1. USING BFS, while traversing if the current is leaf then
+2. min depth= level no.
+
+JAVA CODE-
+class Solution {
+    public int minDepth(TreeNode root) {
+        if(root==null)
+            return 0;
+        Queue<TreeNode> queue =new LinkedList<>();
+        queue.add(root);
+            int levelno=0;
+        while(!queue.isEmpty())
+        {
+            levelno++;
+            int levelsize= queue.size();
+            for(int i=0;i<levelsize;i++)
+            {
+                TreeNode current= queue.poll();
+                
+                //if current is leaf
+                if(current.left==null && current.right==null)
+                  return levelno;
+                
+                if(current.left!=null)
+                    queue.add(current.left);
+                if(current.right!=null)
+                    queue.add(current.right);
+                
+            }
+        }
+        return 0;
+    }
+}
