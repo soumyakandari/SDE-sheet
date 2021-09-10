@@ -1,0 +1,54 @@
+Given the root of a binary tree, return the zigzag level order traversal of its nodes' values.
+(i.e., from left to right, then right to left for the next level and alternate between).
+
+Input: root = [3,9,20,null,null,15,7]
+Output: [[3],[20,9],[15,7]]
+
+JAVA CODE- 
+#similar to levelorder traversal,
+using lefttoright boolean to change the direction of order
+
+1. if lefttoright == true , add the val at the end of currlevel list
+2. if lefttoright== false, add the val at the front of the currlevel list
+
+class Solution {
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        //similar to bfs just us eof lefttoright boolean
+         List<List<Integer>> bfs= new ArrayList<>();
+        boolean lefttoright= true;
+        if(root ==null)
+            return bfs;
+        //queue implementation
+        Queue<TreeNode> queue= new LinkedList<>();
+        queue.add(root);
+        
+        //for queue not empty'
+        while(!queue.isEmpty())
+        { int levelsize=queue.size();
+            List<Integer> currlevel= new LinkedList<>();
+            //for each level adding elements to currlevel
+         for(int i=0;i<levelsize;i++)
+         {
+             TreeNode current= queue.poll();
+             
+             //adding at the end of currlevel
+             if(lefttoright)
+                 currlevel.add(current.val);
+             //adding at the front of currlevel
+             else
+                 currlevel.add(0,current.val);
+             
+             //adding the left and right node to queue
+             if(current.left!=null)
+                 queue.add(current.left);
+             if(current.right!=null)
+                 queue.add(current.right);
+            
+         }
+            bfs.add(currlevel);
+          lefttoright= !lefttoright; //change the boolean val after every level
+          
+        }
+        return bfs;
+    }
+}
