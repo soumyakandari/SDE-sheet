@@ -1,0 +1,57 @@
+Given the root of a binary tree, the level of its root is 1, the level of its children is 2, and so on.
+
+Return the smallest level x such that the sum of all the values of nodes at level x is maximal.
+
+ Input: root = [1,7,0,7,-8,null,null]
+Output: 2
+Explanation: 
+Level 1 sum = 1.
+Level 2 sum = 7 + 0 = 7.
+Level 3 sum = 7 + -8 = -1.
+So we return the level with the maximum sum which is level 2.
+
+ALGO-
+1. take sum of elements at each level'
+2. store in a arraylist
+3. find the max sum in the bfs and return its index+1
+
+JAVA CODE-
+class Solution {
+    public int maxLevelSum(TreeNode root) {
+        //USING BFS
+        if(root==null)
+            return 0;
+        ArrayList<Integer> bfs= new ArrayList<>();
+        Queue<TreeNode> queue= new LinkedList<>();
+        queue.add(root);
+        int levelsum=0;
+        
+        while(!queue.isEmpty())
+        {
+            int levelsize= queue.size();
+            levelsum=0;
+            for(int i=0;i<levelsize;i++)
+            {
+                TreeNode current = queue.poll();
+                levelsum=levelsum+current.val; //sum of elements of same level
+                
+                if(current.left!=null)
+                    queue.add(current.left);
+                 if(current.right!=null)
+                    queue.add(current.right);
+              
+            }
+            //adding the sum of each level into list
+            bfs.add(levelsum);
+        }
+        //find the level of max sum
+        int max= bfs.get(0);
+        for(int i=0;i<bfs.size();i++)
+        {
+            max=Math.max(max,bfs.get(i));
+        }
+         return bfs.indexOf(max) +1;
+            
+        
+    }
+}
