@@ -1,1 +1,44 @@
+Given a Binary Tree, print Left view of it. Left view of a Binary Tree is set of nodes visible when tree is visited from Left side. 
+The task is to complete the function leftView(), which accepts root of the tree as argument.
 
+Left view of following tree is 1 2 4 8.
+
+Input:
+   1
+ /  \
+3    2
+Output: 1 3
+
+USING BFS + FIRST ELEMENT OF EACH LEVEL
+1. Left view is just the first element of each level of Binary tree
+
+JAVA CODE=
+ArrayList<Integer> leftView(Node root)
+    {
+         ArrayList<Integer> bfs= new ArrayList<>();
+         if(root==null)
+           return bfs;
+           
+           Queue<Node> queue= new LinkedList<>();
+           queue.add(root);
+           
+           while(!queue.isEmpty())
+           {
+               int levelsize= queue.size();
+               for(int i=0;i<levelsizel;i++)
+               {
+                   Node current = queue.poll();
+                   if(i==0)
+                     bfs.add(current.data);
+                     
+                    if(current.left!=null)
+                      queue.add(current.left);
+                    if(current.right!=null)
+                      queue.add(current.right);
+        
+               }
+            
+           }
+         return bfs;
+    }
+}
