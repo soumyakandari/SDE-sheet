@@ -1,1 +1,66 @@
+Given the heads of two singly linked-lists headA and headB, return the node at which the two lists intersect. If the two linked lists have no intersection at all, return null.
 
+For example, the following two linked lists begin to intersect at node c1:
+Input: intersectVal = 8, listA = [4,1,8,4,5], listB = [5,6,1,8,4,5], 
+Output: Intersected at '8'
+
+
+#BRUTE FORCE
+1. start from one LL
+2. and check if l1.===l2
+3. run two inner loops iteration
+4.if l1==null then doesn;t exist
+
+T.C-O(N*M)
+
+#BETTER FORCE
+USING HASHING HASHTABLE
+1. Store the node address in the hashtable while traversing through l1
+2. again traverse through l2, if l2 present in hashtable
+3.return the node
+
+T.C-O(N+M)
+ 
+#OPTIMAL FORCE I
+LENGTHY CODE
+1.use two dummy node and point to head of l1, l2
+2.Traverse through both LL and find len of L1,L2
+3.find diff= large-small 
+4. move the longer len LL by the diff time ahead 
+5.then move both d1 and d2 simultaneously , if d1==d2
+6. return intersection node
+
+T.C- O(M)+O(M-N)+O(M)=O(2M)
+S.C-O(1)
+
+
+#OPTIMAL FORCE II
+1.take 2 dummy node and point to head of L1,L2
+2. start moving simula.
+3.if any node==null, shift that node to the head of the other LL
+4.if d1==null , shift to d2 head , vice versa
+5. repeat step2 -4
+6. the moment d1==d2, return intersection node
+
+EDGE CASE : IF BOTH ll DOESN'T COLLIDE, STILL BOTH WILL HIT NULL AT THE SAME TIME SO RETURN NULL
+
+T.C-O(2M)
+S.C-O(1)
+
+JAVA CODE-
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        if((headA==null) && (headB==null))
+            return null;
+        ListNode d1= headA;
+        ListNode d2= headB;
+        
+        while(d1!=d2)
+        {
+           d1= d1==null?headB:d1.next;
+            d2= d2==null?headA:d2.next;
+            
+        }
+        return d1;
+    }
+}
