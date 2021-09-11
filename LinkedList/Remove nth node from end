@@ -1,0 +1,29 @@
+Given the head of a linked list, remove the nth node from the end of the list and return its head.
+
+ Input: head = [1,2,3,4,5], n = 2
+Output: [1,2,3,5]
+
+T.C-O(N)
+S.C-O(N)
+
+USING TWO POINTER APPROACH
+ JAVA CODE-
+ class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode fast = head, slow = head;
+        //fast pointer n step ahead of slow
+        for (int i = 0; i < n; i++)
+            fast = fast.next;
+        
+        //edge case if n==length of LL
+        if (fast == null) 
+            return head.next;
+        
+        while (fast.next != null) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+        slow.next = slow.next.next;
+        return head;
+    }
+}
