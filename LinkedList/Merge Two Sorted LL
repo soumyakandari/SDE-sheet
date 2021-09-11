@@ -1,1 +1,82 @@
 Merge two sorted linked lists and return it as a sorted list. The list should be made by splicing together the nodes of the first two lists.
+Input: l1 = [1,2,4], l2 = [1,3,4]
+Output: [1,1,2,3,4,4]
+
+
+#BRUTE FORCE
+USING EXTERNAL SPACE I.E STORE THE SORTED VAL IN NEW LL
+1.create a dummy node d
+2. add the smaller val in LL
+3. d.next--> 1
+4. create another node dd --> dd=dd.next;
+5. if we took node from l1 , l1=l1.next;
+6. if we took from l2 , l2=l2.next;
+7. iterate untill l1==null or l2==null
+8.simply add the remaining to LL
+
+T.C- O(N1+N2)
+S.C- O(N1+N2)
+
+#OPTIMAL FORCE
+INPLACE SORTING , CONSTANT SPACE COMPLEXITY
+
+
+T.C- O(N1+N2)
+S.C-O(1)
+
+ALGO=
+1.make l1 points to smallest and l2 point to largest (use swap if needed)
+2.node res = to store the start of l1
+3. iteration starts, create new node temp = l1
+4. and l1 moves to next until its less than l2.val
+5. if l1.val>l2,val , break the connection now , temp.next-->l2
+6. again swap l1 and l2 as l1 always smallest
+7. stop  iteration until,l1==null
+
+
+JAVA CODE-
+class Solution {
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+    
+    // inplace sorting with constant space complexity
+        if(l1==null)
+            return l2;
+        if(l2==null)
+            return l1;
+        
+        //to make L1 point to the smallest element
+        if(l1.val>l2.val)
+        {
+            //swap the pointers
+            ListNode swap= l1;
+            l1=l2;
+            l2=swap;
+    
+        }
+    
+        //node to store the start of LL
+        ListNode res= l1;
+        
+        while(l1!=null && l2!=null)
+        {
+            //Node to store the current val
+            ListNode temp = null;
+            while(l1!=null &&l1.val<=l2.val)
+            {
+                temp=l1;
+                l1=l1.next;
+        
+            }
+        //now point to the new small element of other list
+            temp.next=l2;
+            
+            
+            //swap the val of l1 and l2 as l1 always points smallest
+            ListNode swap= l1;
+            l1=l2;
+            l2=swap;
+            
+        }
+    return res;
+    }    
+ }
