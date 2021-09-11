@@ -1,1 +1,27 @@
+Given the root of a binary tree and an integer targetSum, return true if the tree has a root-to-leaf path such that adding up all the values along the path equals targetSum.
 
+A leaf is a node with no children.
+Input: root = [5,4,8,11,null,13,4,7,2,null,null,null,1], targetSum = 22
+Output: true
+
+USING NORMAL RECURSION AND LOGIC OF DFS
+1. DFS , always complete the left most root to node path
+2. update the sum for every node , sum= sum-root.data
+3. check if sum ==root.data and the root is also leaf
+4. function will check for both left/rght side path from root and return the or of both result
+
+T.C- O(N)
+S.C-O(1)
+
+JAVA CODE-
+class Solution {
+    public boolean hasPathSum(TreeNode root, int sum) {
+        if(root==null)
+            return false;
+        if(root.val==sum && root.left==null && root.right==null) //CONDITION
+            return true;
+        
+        return hasPathSum(root.left, sum-root.val) ||  hasPathSum(root.right, sum-root.val); //OR OF BOTH CHILDREN NODES
+        
+    }
+}
