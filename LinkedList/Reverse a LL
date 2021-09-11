@@ -2,3 +2,41 @@ Given the head of a singly linked list, reverse the list, and return the reverse
 Input: head = [1,2,3,4,5]
 Output: [5,4,3,2,1]
 
+T.C-O(N)
+S.C-O(N)
+
+ALGO-
+1. use of dummy head , head and next node
+2. dummyhead points to null in the beginning
+3. next node points to the next of head
+4. step1 : pointt the next node to head.next
+5.step2: break the connection, head= dummyhead;
+6. increement the position : dummyhead= head
+7.head= next
+8. return dummy
+
+8. now the first node points to null and last node to head.
+
+
+JAVA CODE:-
+
+    public ListNode reverseList(ListNode head) {
+        //dummynode 
+        ListNode dummy= null;
+        
+        while(head!=null)
+        {
+            //next node to point the head next
+            ListNode next= head.next;
+            //break the connection
+            head.next= dummy;
+            
+            //increement the position
+            dummy=head;
+            head=next;
+            
+    
+        }
+        return dummy;//starts from last node
+    }
+}
