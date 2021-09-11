@@ -1,1 +1,38 @@
+Given the head of a singly linked list, return the middle node of the linked list.
 
+If there are two middle nodes, return the second middle node.
+
+ #BRUTE FORCE
+ 1. Count the len of LL
+ 2. f=if len=odd, mid=len+1/2 
+ 3. if len = even , mid= 1+ len/2, for 2nd middle node
+4.iterate till mid return node at mid;
+
+T.C-O(2N)
+S.C-O(1)
+
+#OPTIMAL FORCE
+USING TORTOISE METHOD
+
+slow and fast pointer 
+1. slow ==> 1 step
+2. fast==> 2 step
+3. odd len =  when fast at last node, slow will be at the mid
+4. even len == when fast out of LL i.e fast==null, slow at 2nd mid automatically
+
+T.C-O(N/2)
+S.C= O(1)
+
+JAVA CODE=
+class Solution {
+    public ListNode middleNode(ListNode head) {
+       ListNode slow=head,fast=head;
+        while(fast!=null && fast.next!=null)
+        {
+            slow=slow.next;
+            fast=fast.next.next;
+        
+        }
+        return slow;
+}
+}
