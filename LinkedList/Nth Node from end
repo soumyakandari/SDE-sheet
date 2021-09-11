@@ -20,6 +20,8 @@ BY USING TWO POINTERS
 T.C- O(N)
 S.C- O(1)
 
+
+
 JAVA CODE-
 //Function to find the data of nth node from the end of a linked list.
     int getNthFromLast(Node head, int n)
