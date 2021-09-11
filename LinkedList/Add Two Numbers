@@ -19,7 +19,7 @@ Explanation: 342 + 465 = 807.
 10. return dummy.next;
 
 T.C-O(MAX(N1,N2))
-S.C-O(N)
+S.C-O(N+M)
 
 JAVA CODE-
 class Solution {
