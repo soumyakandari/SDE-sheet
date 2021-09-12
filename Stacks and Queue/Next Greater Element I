@@ -1,0 +1,37 @@
+GIVEN NORMAL ARRAY ONLY CHECK ON THE RIGHT SIDE .
+
+
+
+
+JAVA CODE-
+class Solution {
+    public int[] nextGreaterElements(int[] nums) {
+        int n= nums.length;
+        int nge[]= new int[n];
+        //stack 
+        Stack<Integer> st= new Stack<>();
+        //start iterating from the back
+        for(int i=n-1;i>=0;i--)
+        {
+            //removing all the smaller elements from stack
+            while(st.isEmpty()== false && st.peek()<=nums[i])
+                st.pop();
+         
+            if(i<n)
+            {
+                if(st.isEmpty()==false)
+                     nge[i]=st.peek(); //add the nge into res i.e the top of stack
+                else
+                    nge[i]=-1;  //is stack is empty then no nge available
+                
+                
+            }
+            //push the element into stack
+            st.push(nums[i]);
+            
+            
+            
+        }
+        return nge;
+    }
+}
