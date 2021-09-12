@@ -1,1 +1,47 @@
+Given a binary tree, find the lowest common ancestor (LCA) of two given nodes in the tree.
 
+According to the definition of LCA on Wikipedia: “The lowest common ancestor is defined between two nodes p and q as the lowest node in T that has both p and q as descendants 
+(where we allow a node to be a descendant of itself).”
+
+ Input: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 1
+Output: 3
+Explanation: The LCA of nodes 5 and 1 is 3.
+
+#using DFS +approach no.2
+T.C- O(N)
+S.C-O(1)
+
+APPROACH NO.1
+1.calculate the root to node path
+2. the point the path for both nodes differ .stop
+3. return the prev node from that point
+
+
+EXTRA SPACE --> SO THIS METHOD NOT PREFFERED
+
+#APPROACH NO.2
+1. Checking the node and if that is equal to given node 
+2. find the node from both left and right side.
+3. if both side is null---> node is LCA
+4. if one of them is null, other one-->LCA
+
+JAVA CODE-
+class Solution {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if(root==null)
+            return null;
+        //check if the root is equal to given node
+        if(root.val ==p.val || root.val ==q.val)
+             return root;
+        
+        //check the left and right side of node
+     TreeNode left = lowestCommonAncestor(root.left,p,q);
+      TreeNode right = lowestCommonAncestor(root.right,p,q);   
+        
+        //if both side are val
+        if(left!=null && right!=null)
+            return root;
+       //if one of them is  null and other is val
+         return left!=null ? left: right;
+    }
+}
