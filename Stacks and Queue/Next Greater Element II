@@ -16,6 +16,21 @@ USING STACKS
 T.C- O(2N +2N)=O(N)
 S.C-O(N)
 
+ALGO-
+1. create a stack 
+2. start iterating from the back. check if there is any element in the stack greater than the num[i]
+3. if stack is empty, nge does'nt exist , nge[i]=-1
+4. always push the element into the stack after finding its nge
+5. check if the element present in stack is greater than num[i] , then NGE is the top
+6. pop all the elements for stack that are lesser than nums[i] , they areof no use 
+
+
+NOTE:- 1.FOR CIRCULAR ARRAY , WE NEED TO TRAVERSE AGAIN FROM RIGHT->LEFT
+ USE INDEXING AS , i=i%n;
+2. example: if n=5, and for 6th index , i=6%5=1 --> go to index 1
+3. THUS the loop will run 2n times
+
+
 JAVA CODE-
 class Solution {
     public int[] nextGreaterElements(int[] nums) {
