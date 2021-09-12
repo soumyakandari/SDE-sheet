@@ -1,1 +1,31 @@
+Given the root of a binary tree, check whether it is a mirror of itself (i.e., symmetric around its center).
 
+ Input: root = [1,2,2,3,4,4,3]
+Output: true
+
+#USING DFS + TWO TREE PATTERN
+T.C-O(N)
+S.C-O(1)
+
+ALGO
+1. create a copy of the given tree
+2. now check the left side of main tree with the right side of the copy tree
+3. if both are null , true 
+4. if one of them are null ,false
+5. the left node of main tree should be equal to right node of copy tree, vice versa.
+
+JAVA CODE-
+class Solution {
+    public boolean findsym(TreeNode root1,TreeNode root2) {
+        if(root1==null && root2==null)
+            return true;
+         if(root1==null || root2==null)
+            return false;
+        
+      return (root1.val==root2.val) &&findsym(root1.left,root2.right)&&findsym(root1.right,root2.left);
+        
+    }
+     public boolean isSymmetric(TreeNode root) {
+         return findsym(root,root);
+}
+}
