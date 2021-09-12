@@ -1,7 +1,15 @@
 GIVEN NORMAL ARRAY ONLY CHECK ON THE RIGHT SIDE .
+ALGO-
+1. create a stack 
+2. start iterating from the back. check if there is any element in the stack greater than the num[i]
+3. if stack is empty, nge does'nt exist , nge[i]=-1
+4. always push the element into the stack after finding its nge
+5. check if the element present in stack is greater than num[i] , then NGE is the top
+6. pop all the elements for stack that are lesser than nums[i] , they areof no use 
 
 
-
+T.C-O(n)
+S.C-O(n)
 
 JAVA CODE-
 class Solution {
