@@ -1,2 +1,42 @@
 Problem Statement: Given a binary tree where each path going from the root to any leaf form a valid sequence,
 check if a given string is a valid sequence in such binary tree. 
+
+ALGO-
+1. start iterating through the seq and check index val with node.val
+2. if the node val matches move forward and iterate forward 
+3. if it does'nt matches move to the right side of node
+4.EDGE CASE- if the path has more nodes even when it matches with the seq.
+5. return false for when i is out of seq i.e i>=seq.length;
+6. use OR operator for both left and right side analysis
+
+JAVA CODE-
+class solution{
+
+public static boolean haspath( Node root, int[] seq)
+   {
+       // create a new recursive function
+       if(root==null)
+          return sequence.length==0;
+          
+        return findsequence(root, seq,0);
+     }
+   public static boolean findsequence(Node root,int[] seq, int i)
+   {
+       if(root==null)
+          return false;
+          //edge case
+        if(i>=seq.length || root.val!=seq[i])
+            return false;
+         
+         //when node is leaf and index is at the last element
+         if(root.left==null && root.right==null && i==seq.length-1;
+           return true;
+        
+        
+        return findsequence(root.left,seq,i+1) || findsequence(root.right,seq,i+1):
+    }
+         
+         
+   
+   
+   
