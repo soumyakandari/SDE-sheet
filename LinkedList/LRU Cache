@@ -1,0 +1,124 @@
+Design a data structure that follows the constraints of a Least Recently Used (LRU) cache.
+
+Implement the LRUCache class:
+
+LRUCache(int capacity) Initialize the LRU cache with positive size capacity.
+int get(int key) Return the value of the key if the key exists, otherwise return -1.
+void put(int key, int value) Update the value of the key if the key exists. Otherwise, add the key-value pair to the cache.
+If the number of keys exceeds the capacity from this operation, evict the least recently used key.
+
+#USING DOUBLY LINKEDLIST AND HASHMAP
+
+T.C-O(1)
+S.C-O(CAPACITY)
+
+#put():- 1.check if it already exist in hashmap or not
+         2. if exist then remove it from its original position and hashmap
+         3. add it after head and add in hashmap with the new val
+         4. if doesn't exist, check if there is Space available in hashmap
+         5. if available, insert into the DLL after head -->MRU
+         6. if capacity is full, delete the LRU i.e node before tail
+         7. add into the DLL and hashmap
+         
+#get():- 1. check if it already exist in hashmap 
+         2. if it exist then , make that node the MRU
+         3. making MRU-- DELETE + INSERT AFTER HEAD
+         4. return the value of the node
+         5. if does'nt exist then return -1
+         
+
+JAVA CODE-
+class LRUCache {
+    //defining the node class
+    
+class Node{
+    Node prev,next;
+    int key,value;
+    Node(int key,int value)
+    {
+        this.key=key;
+        this.value=value;
+    }
+    
+    
+}
+  int capacity;
+    //Creating head and tail node
+    Node head= new Node(0,0);
+    Node tail = new Node(0,0);
+    
+// creating a hashmap to store the key and its address node in DLL
+    HashMap<Integer,Node> map= new HashMap();
+    //function for LRU cache
+    public LRUCache(int capacity) {
+        this.capacity=capacity;
+        //creating a DLL
+        head.next=tail;
+        tail.prev=head;
+        
+    }
+    public int get(int key) {
+        //check if the map contains the key
+        if(map.containsKey(key))
+        {
+            Node node= map.get(key);
+            //now this key is Most recently used
+            //to create the key as mru
+            
+            remove(node); //remove from its prev position
+            insert(node);//insert after head 
+            
+            return node.value; 
+        }
+        else 
+             return -1;
+        
+    }
+    
+    public void put(int key, int value) {
+        //check if the key already exist then remove it and then insert with new 
+        //updated val
+        if(map.containsKey(key))
+        {
+            remove(map.get(key));
+        }
+        //if it does not exist then check capacity available
+        if(map.size()==capacity)
+            remove(tail.prev); //capacity full --> remove the LRU i.e node before tail
+        
+        insert(new Node(key,value));     
+    }
+    //function for removing the node from head
+    private void remove(Node node)
+    {
+        //first remove from hashmap
+        map.remove(node.key);
+        
+        //removing from DLL
+        node.next.prev= node.prev;
+        node.prev.next=node.next;    
+    }
+    
+    //function for adding the node (key,value)into the DLL after the head
+    private void insert(Node node)
+    {
+        //first put it into map 
+        map.put(node.key,node); //key and its node
+         
+        //inserting the node after head;
+        node.next=head.next;
+        node.next.prev=node;
+        head.next=node;
+        node.prev=head;
+     
+    }
+}
+
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * LRUCache obj = new LRUCache(capacity);
+ * int param_1 = obj.get(key);
+ * obj.put(key,value);
+ */
+
+ 
