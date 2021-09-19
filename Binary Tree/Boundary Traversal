@@ -1,1 +1,93 @@
+Given a binary tree, return the values of its boundary in anti-clockwise direction starting from root.
+Boundary includes left boundary, leaves, and right boundary in order without duplicate nodes.
+Input:
+  1
+   \
+    2
+   / \
+  3   4
+
+Ouput:
+[1, 3, 4, 2]
+
+ALGO-
+1. first add the root node 
+2. add all the left boundary nodes without leaf nodes
+3. add all the leaf nodes
+4. add all the right boundary nodes without leaf nodes in REVERSE order
+
+T.C=O(N)
+S.C-O(N)
+
+JAVA CODE-
+class solution{
+public static ArrayList<Integer> printBoundary(Node node)
+{
+    //arraylist to store the boundary
+    ArrayList<Integer> ans= new ArrayList<>();
+    if(isleaf(node)==false)
+       ans.add(node.val);
+      
+    //left boundary
+    addleft(node,ans);
+    //leaf nodes
+    addleaf(node,ans);
+    //right boundary
+    addright(node,ans);
+    
+    return ans;
+}
+void addleft(Node root,ArrayList<Integer> res)
+{
+    Node curr= root.left;
+    while(curr!=null)
+    {
+         if(isleaf(curr)==false)
+            res.add(curr.val);
+         if(curr.left!=null)
+             curr=curr.left;
+           else  //if left node does'nt exist
+             curr=curr.right;
+     }
+  }
+  void addright(Node root,ArrayList<Integer> res)
+  {
+      Node curr= root.right;
+      //another list to store reverse
+      ArrayList<Integer> temp= new ArrayList<>();
+      while(curr!=null)
+      {
+        if(isleaf(curr)==false)
+            temp.add(curr.val);
+          if(curr.right!=null)
+              curr= curr.right;
+           else  //if right node does'nt exist
+              curr= curr.left;
+        }
+        //to add reverse of right boundary in res
+        for(int i=temp.size()-1;i>=0;--i)
+            res.add(temp.get(i));
+  }
+  void addleaf(Node root,ArrayList<Integer> res)
+  { 
+     if(isleaf(root))
+       { res.add(root.val);
+           return;
+        }
+      //preorder traversal to find leaf
+      // root left right
+      if(root.left!=null)
+         addleaf(root.left,res);
+      if(root.right!=null)
+         addleaf(root.right,res):
+  }
+public static boolean isleaf(Node root)
+{
+    if(root.left==null && root.right==null)
+       return true;
+     else
+        return false;
+}
+}
+
 
