@@ -1,2 +1,44 @@
 Given an integer K and a numeric string str (all the characters are from the range [‘0’, ‘9’]).
 The task is to count the number of sub-strings of str that are divisible by K.
+
+Input: str = “33445”, K = 11 
+Output: 3 
+Sub-strings that are divisible by 11 are “33”, “44” and “3344”
+
+Input: str = “334455”, K = 11 
+Output: 6 
+
+JAVA CODE-
+class solution{
+public static void main(String []agrs)
+{
+   String str = "33445";
+        int len = str.length();
+        int k = 11;
+        System.out.println(countSubStr(str, len, k));
+ }
+	// Function to return the count of sub-strings
+	// of str that are divisible by k
+	static int countSubStr(String str, int len, int k)
+	{
+		int count = 0;
+	
+		for (int i = 0; i < len; i++)
+		{
+			int n = 0;
+	
+			// Take all sub-strings starting from i
+			for (int j = i; j < len; j++)
+			{
+				n = n * 10 + (str.charAt(j) - '0');
+	
+				// If current sub-string is divisible by k
+				if (n % k == 0)
+					count++;
+			}
+		}
+    return count;
+ }
+}
+	
+
