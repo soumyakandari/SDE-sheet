@@ -1,0 +1,2 @@
+Given an integer K and a numeric string str (all the characters are from the range [‘0’, ‘9’]).
+The task is to count the number of sub-strings of str that are divisible by K.
