@@ -1,0 +1,56 @@
+Given a string s, return the number of palindromic substrings in it.
+
+A string is a palindrome when it reads the same backward as forward.
+
+A substring is a contiguous sequence of characters within the string.
+
+ Input: s = "abc"
+Output: 3
+Explanation: Three palindromic strings: "a", "b", "c".
+
+USING SUBSTRING 
+T.C-O(N2)
+
+JAVA CODE-
+class Solution {
+    public int countSubstrings(String s) {
+        
+        int count=0;
+        int n=s.length();
+        //hashset to avoid duplicates
+        ArrayList<String> set= new ArrayList<>();
+        //find all the substrings
+        for(int i=0;i<n;i++)
+        {
+            for(int j=i;j<n;j++)
+            {
+               set.add(s.substring(i,j+1));   //FIRST INDEX INCLUSIVE AND END INDEX EXCLUSIVE
+            }
+        }
+        //iterating through the hashset
+         for(int i=0;i<set.size();i++)
+            {  
+                if(palindrome(set.get(i)))
+                    count++;
+                
+            }
+            return count;
+    }
+    boolean palindrome(String str)
+    {
+     int i=0;
+     int j= str.length()-1;
+     while(i<j)
+     {
+         if(str.charAt(i)!=str.charAt(j))
+            return false;
+        
+        i++;
+        j--;
+         
+     }
+        return true;
+        
+    }
+} 
+        
