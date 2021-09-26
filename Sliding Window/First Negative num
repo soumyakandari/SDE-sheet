@@ -1,1 +1,25 @@
+Given an array A[] of size N and a positive integer K, find the first negative integer for each and every window(contiguous subarray) of size K.
+Input : 
+N = 5
+A[] = {-8, 2, 3, -6, 10}
+K = 2
+Output : 
+-8 0 -6 -6
+Explanation :
+First negative integer for each window of size k
+{-8, 2} = -8
+{2, 3} = 0 (does not contain a negative integer)
+{3, -6} = -6
+{-6, 10} = -6
 
+#USING SLIDING WINDOW AND QUEUE
+algo-
+1. output queue size= N-k+1
+2. add the negative element in queue
+3. if window size ==k, check if queue is empty or not
+4. if empty---> ans=0
+5. else the first element on queue is ans
+6. now to slide window, check id a[i]<0 then remove the first element on queue
+
+
+JAVA CODE-
