@@ -18,3 +18,19 @@ Input:
 
 Output:
 4 1 1 0 0
+
+ALGO- count[current] += count[neighbor];
+
+#JAVA CODE-
+public static int[] dfs(int current,int prev, int[] count,HashMap<> tree)
+{
+   count [current]=1;
+   for(int neighbor: tree.get(current))
+    {
+       dfs(neighbor,current,count,tree);
+       count [current]+=count[neighbor];
+      }
+     return count;
+    }
+    
+   NOTE- AFTER RETURNING THE COUNT ARRAY, reduce 1 from each element to get the final ans
