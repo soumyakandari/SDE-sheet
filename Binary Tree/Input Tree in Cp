@@ -1,0 +1,48 @@
+how to input a tree in CP??
+- using hashmap and arraylist to store the nodes and their corresponding children
+
+GIVEN - N=6
+     NO.of edges= n-1 =5
+     edges:-
+     1 2
+     1 3
+     2 4
+     2 5
+     3 6
+
+
+#USING HASHMAP AND STORUNG KEY AS THE MAIN NODE
+- in the value --- store an arraylist that contains all the adjacent nodes of the key node
+
+
+JAVA CODE-
+
+public static void main(String[] args)
+{
+   Scanner sc= new Scanner(System.in);
+   //input the testcase
+   int t= sc.nextInt();
+   
+   while(t-- >0)
+   {
+      //node
+      int n= sc.nextInt();
+      //creating a hashmap
+      HashMap<Integer,ArrayList<Integer>> tree= new HashMap<>();
+      
+      //enter an empty list to all keys
+      for(int i=1;i<=n;i++)
+        tree.put(i,new ArrayList<>());
+        
+       for(int i=0;i<n;i++)
+       { 
+          int a= sc.nextInt();
+          int b= sc.nextInt();
+          
+          //add the value in the empty list
+          tree.get(a).add(b);
+          //adding the updated list to hashmap
+          tree.put(a,tree.get(a));
+          
+         }
+      }
