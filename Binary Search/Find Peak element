@@ -1,0 +1,30 @@
+A peak element is an element that is strictly greater than its neighbors.
+
+Given an integer array nums, find a peak element, and return its index. If the array contains multiple peaks, return the index to any of the peaks.
+
+You may imagine that nums[-1] = nums[n] = -∞.
+
+You must write an algorithm that runs in O(log n) time.
+
+#using binary search
+t.c-o(logn)
+
+JAVA CODE-
+
+class solution{
+public static int findPeak(int [] nums)
+{
+int low= 0,high=nums.length-1;
+while(low<high)
+   {  //actual mid
+ int mid1 = (low+high)/2;
+       //neighbor of mid
+            int mid2 = mid1+1;
+            if(num[mid1] < num[mid2])
+                low = mid2;
+            else
+                high = mid1;
+     }
+  return low; //return the index
+  }
+ }
