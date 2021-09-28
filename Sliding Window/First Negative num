@@ -23,3 +23,49 @@ algo-
 
 
 JAVA CODE-
+class Compute {
+    
+    public long[] printFirstNegativeInteger(long A[], int N, int K)
+    {  
+       long []res= new long[N-K+1];// ans
+       // queue to store the first negative integer
+       Queue<Long> queue= new LinkedList<>();
+       int i=0,j=0;
+       
+       //using sliding window
+       while(j<N){
+           
+          //store the negative num
+          if(A[j]<0)
+            queue.add(A[j]);
+        
+          if(j-i+1<K)
+            j++;
+            
+        if(j-i+1==K)
+        {
+            //calculations
+            if(queue.isEmpty())
+                res[i]=0;
+          else
+             res[i]=queue.peek(); //add the first element on the queue
+             
+            
+            if(A[i]<0)
+             { queue.poll(); //
+             }
+              
+              i++;
+             
+            
+        }
+        j++;
+        
+            //slide the window
+            
+            
+        }
+       
+       return res;
+    }
+}
