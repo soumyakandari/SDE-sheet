@@ -1,0 +1,32 @@
+Given a string Str which may contains lowercase and uppercase chracters. The task is to remove all duplicate characters from the string and find the resultant string. The order of remaining characters in the output should be same as in the original string.
+
+Example 1:
+Input:
+Str = HappyNewYear
+Output: HapyNewYr
+Explanation: After removing duplicate
+characters such as p, e, a, we have
+string as "HapyNewYr".
+
+#USING HASHSET 
+T.C=O(N)
+
+JAVA CODE:-
+class Solution {
+    String removeDuplicates(String str) {
+        HashSet<Character> map =new HashSet<>();
+           
+         String res="";
+         for(int i=0;i<str.length();i++)
+         {
+             if(map.contains(str.charAt(i))==false)
+               { res=res+str.charAt(i);
+                 map.add(str.charAt(i));
+              
+               }
+             
+         }
+         return res;
+    }
+}
+
