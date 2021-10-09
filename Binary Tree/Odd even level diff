@@ -1,0 +1,52 @@
+Given a Binary Tree. Find the difference between the sum of node values at even levels and the sum of node values at the odd levels.
+Input:
+            1
+          /   \
+         2     3
+
+Output: -4
+
+Explanation:
+sum at odd levels - sum at even levels
+= (1)-(2+3) = 1-5 = -4
+
+#USING BFS 
+
+JAVA CODE-
+class Solution
+{
+	int getLevelDiff(Node root)
+	{
+	    int res=0;
+	    int even=0,odd=0;
+	    int val=1;
+	    if(root==null)
+	      return 0;
+	      
+	    Queue<Node> queue= new LinkedList<>();
+	    queue.add(root);
+	    while(!queue.isEmpty())
+	    {
+	       int size= queue.size();
+	       for(int i=0;i<size;i++)
+	       {
+	           Node current= queue.poll();
+	           if(val%2==0)
+	              even =even+current.data;
+	           else
+	               odd= odd+current.data;
+	        
+	         if(current.left!=null)
+	            queue.add(current.left);
+	           
+	         if(current.right!=null)
+	            queue.add(current.right);
+	           
+	       }
+	       val++;
+	       
+	    }
+	    return odd-even;
+	    
+	}
+}
