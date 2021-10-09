@@ -12,3 +12,31 @@ the array sums up to 13.
 T.C-O(N^2)
 S.C-O(1)
 
+class Solution
+{
+    //Function to find if there exists a triplet in the 
+    //array A[] which sums up to X.
+    public static boolean find3Numbers(int A[], int n, int X) { 
+    
+           Arrays.sort(A);
+           for(int i=0;i<n;i++)
+           {
+               int lo=i+1,hi=n-1;
+               int sum=X-A[i];
+               
+               while(lo<hi)
+               {
+                   if(A[lo]+A[hi]==sum)
+                     return true;
+                    
+                    else if(A[lo]+A[hi]<sum)
+                         lo++;
+                    else
+                        hi--;
+            
+               }
+             
+           }
+          return false;
+    }
+}
