@@ -8,3 +8,40 @@ Input:
     /  \
    2    3
 Output: 2
+
+
+T.C- O(N)
+S.C- O(N)
+
+JAVA CODE:=
+
+class Solution {
+    //Function to find the height of a binary tree.
+    int height(Node node) 
+    {
+         //using bfs
+         int height=0;
+         if(node==null)
+           return 0;
+          
+        Queue<Node> queue=new LinkedList<>();
+        queue.add(node);
+        while(!queue.isEmpty())
+          {
+              int size=queue.size();
+              height++;
+              for(int i=0;i<size;i++)
+              {
+                  Node curr= queue.poll();
+                  if(curr.left!=null)
+                    queue.add(curr.left);
+                 if(curr.right!=null)
+                    queue.add(curr.right);
+                    
+                  
+              }
+          }
+        
+        return height;
+    }
+}
