@@ -38,10 +38,7 @@ class Compute {
           //store the negative num
           if(A[j]<0)
             queue.add(A[j]);
-        
-          if(j-i+1<K)
-            j++;
-            
+       
         if(j-i+1==K)
         {
             //calculations
@@ -54,15 +51,13 @@ class Compute {
             if(A[i]<0)
              { queue.poll(); //
              }
-              
+              //slide the window
               i++;
-             
+             j++;
             
         }
-        j++;
-        
-            //slide the window
-            
+          if(j-i+1<K)
+            j++;
             
         }
        
