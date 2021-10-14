@@ -7,3 +7,53 @@ N = 9, K = 3
 arr[] = 1 2 3 1 4 5 2 3 6
 Output: 
 3 3 4 5 5 5 6 
+
+
+#USING DEQUE AND SLIDING WINDOW
+T.C-O(n)
+S.C-O(K)
+
+
+Algo-
+1. add all the max element in the dequeu
+2. all the smaller element before max jth element -->no use , deque.poll()
+3. all the smaller element after max jth --> might be useful for future window, deque.add()
+4. calculations- check if the ith element is not the first element of queue --> poll()
+
+JAVA CODE-
+class Solution
+{
+    //Function to find maximum of each subarray of size k.
+    static ArrayList <Integer> max_of_subarrays(int arr[], int n, int k)
+    {
+        ArrayList<Integer> res= new ArrayList<>();
+        Deque<Integer>queue= new LinkedList<>();
+        int i=0,j=0;
+        while(j<n)
+        {  
+            //check if element is max and remove all the smaller element before it 
+            while( !queue.isEmpty() && queue.peekLast()<arr[j])
+                 queue.pollLast();
+         
+            //add element in queue
+             queue.add(arr[j]);
+            if((j-i+1 )<k)
+               j++;
+             if((j-i+1) ==k)
+             {   //ans
+                 res.add(queue.peekFirst());
+              
+               //calculations
+               //check if the ith element is not queue front
+               if(arr[i]==queue.peekFirst())
+                   queue.pollFirst();
+              
+              i++;
+              j++;
+                 
+            
+             }
+        }
+        return res;
+    }
+}
