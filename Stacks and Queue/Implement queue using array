@@ -11,3 +11,6 @@ ALGO-
 6. front++ ; count--;
 
 
+#USING A CIRCULAR ARRAY CONCEPT.
+NOTE- if front and rear at same index -->queue is empty
+TOP() - element at index front%N
