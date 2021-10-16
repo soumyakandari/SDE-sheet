@@ -1,1 +1,64 @@
+Implement a last-in-first-out (LIFO) stack using only two queues. The implemented stack should support all the functions of a normal stack (push, top, pop, and empty).
 
+Implement the MyStack class:
+
+void push(int x) Pushes element x to the top of the stack.
+int pop() Removes the element on the top of the stack and returns it.
+int top() Returns the element on the top of the stack.
+boolean empty() Returns true if the stack is empty, false otherwise.
+
+#BETTER FORCE
+USIN TWO QUEUE
+
+1.Q1 AND Q2
+2.push(x)--> x->q2
+             q1-->q2
+             swap q1 and q2
+3. pop() - q1.peek()
+
+T.C- O(n)
+S.C-O(n)
+
+#OPTIMAL FORCE
+USING SINGLE QUEUE
+
+ALGO-
+1. add the element to queue.
+2. swap the element size-1 to the top of queue
+3. push them to the top 
+
+T.C- O(n)
+S.C-O(n)
+
+JAVA CODE-
+class MyStack {
+     Queue<Integer> q= new LinkedList<>();
+    public MyStack() {
+        
+    }
+    
+    public void push(int x) {
+        //add the element to queue
+        q.add(x);
+          //now for size-1 times swap the element to top
+        for(int i=0;i<q.size()-1;i++)
+        {
+            q.add(q.peek());
+             q.poll();
+     
+        }
+        
+    }
+    
+    public int pop() {
+       return q.poll();
+    }
+    
+    public int top() {
+       return q.peek();
+    }
+    
+    public boolean empty() {
+        return q.isEmpty();
+    }
+}
