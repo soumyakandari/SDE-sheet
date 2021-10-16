@@ -1,1 +1,13 @@
+#USING ARRAY OF MAX QUEUE SIZE
+T.C -O(1)
+S.C-O(N)
+
+ALGO-
+1. TWO POINTER front and rear, front at the top , rear -->index to add next element
+2. count varaiable to check the capacity of queue
+3. push(x)- always check if count<n , then add x at rear index = a[rear%n]
+4. rear++; count ++;
+5.POP() - check capacity, change the value of a[front%n]=-1
+6. front++ ; count--;
+
 
