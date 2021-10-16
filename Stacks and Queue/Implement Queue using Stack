@@ -1,0 +1,42 @@
+Implement a first in first out (FIFO) queue using only two stacks. The implemented queue should support all the functions of a normal queue (push, peek, pop, and empty).
+Implement the MyQueue class:
+
+void push(int x) Pushes element x to the back of the queue.
+int pop() Removes the element from the front of the queue and returns it.
+int peek() Returns the element at the front of the queue.
+boolean empty() Returns true if the queue is empty, false otherwise.
+
+Input
+["MyQueue", "push", "push", "peek", "pop", "empty"]
+[[], [1], [2], [], [], []]
+Output
+[null, null, null, 1, 1, false]
+
+#BETTER FORCE
+USING TWO STACKS
+S1 AND S2
+
+Algo=
+1. keep the first element always on top of stack s1 using s2
+2. PUSH- s1-->s2
+         x-->s1
+         s2-->s1
+3.POP- S1.pop()
+
+T.C- O(N)
+S.C-O(2N)
+
+#OPTIMAL FORCE
+USING TWO STACKS , INPUT AND OUTPUT
+
+Algo-
+1.PUSH- Add x -->input
+2.POP() - check if output is empty or not, output.pop()
+3. otherwise  , input-->output,then output.pop()
+4.TOP ()-check if output not empty, output.top()
+5.otherwise , input-->output,then output.top()
+
+T.C- O(1) AMORTISED MEANS MOST OF THE TIME THE T.C is O(1)
+S.C-O(2N)
+
+JAVA CODE-
