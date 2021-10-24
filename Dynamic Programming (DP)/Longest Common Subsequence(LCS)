@@ -1,1 +1,45 @@
+Given two strings text1 and text2, return the length of their longest common subsequence. If there is no common subsequence, return 0.
 
+A subsequence of a string is a new string generated from the original string with some characters (can be none) deleted without changing the relative order of the remaining characters.
+
+For example, "ace" is a subsequence of "abcde".
+A common subsequence of two strings is a subsequence that is common to both strings.
+Input: text1 = "abcde", text2 = "ace" 
+Output: 3  
+Explanation: The longest common subsequence is "ace" and its length is 3.
+
+#USING RECURSION +MEMOISATION
+T.C- O(N*M)
+S.C -O(N*M)
+
+JAVA CODE -
+class Solution {
+    
+    int[][] t = new int[1001][1001];  
+   
+    
+    
+    public int longestCommonSubsequence(String text1, String text2) {
+        int n=text1.length();
+        int m=text2.length();
+        char[] x= text1.toCharArray();
+        char []y=text2.toCharArray();
+        for(int[] arr1 : t) 
+  Arrays.fill(arr1, -1);
+        
+        int res= lcs(x,y,n,m);
+        return res;
+    }
+    int lcs(char[] x,char[]y,int n,int m)
+    {
+        if(n==0 || m==0)
+            return 0;
+        if(t[n][m]!=-1)
+            return t[n][m];
+        if(x[n-1]==y[m-1])
+             return t[n][m]= 1+lcs(x,y,n-1,m-1);
+        else
+             return t[n][m]=Math.max(lcs(x,y,n,m-1),lcs(x,y,n-1,m));
+       
+    }
+}
