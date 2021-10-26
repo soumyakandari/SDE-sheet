@@ -9,3 +9,42 @@ Input: grid = [
 ]
 Output: 1
 
+#USING IN PLACE CHANGING VAL OF ELEMENT // DP
+
+JAVA CODE;-
+
+class Solution {
+
+     private int n;
+private int m;
+
+public int numIslands(char[][] grid) {
+    int count = 0;
+    n = grid.length;
+    //edge case
+    if (n == 0) return 0;
+    m = grid[0].length;
+    
+    //to count islands
+    for (int i = 0; i < n; i++){
+        for (int j = 0; j < m; j++)
+            if (grid[i][j] == '1') {
+                Dp(grid, i, j);
+                ++count;
+            }
+    }    
+    return count;
+}
+
+private void Dp(char[][] grid, int i, int j) {
+    //base condition, if element out of grid or equal to 0
+    if (i < 0 || j < 0 || i >= n || j >= m || grid[i][j] != '1') return;
+    //update the val
+    grid[i][j] = '0';
+    //4 choice
+Dp(grid, i + 1, j);
+    Dp(grid, i - 1, j);
+    Dp(grid, i, j + 1);
+    Dp(grid, i, j - 1);
+}
+}
