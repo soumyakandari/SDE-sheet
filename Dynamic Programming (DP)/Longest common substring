@@ -1,0 +1,30 @@
+Given two strings. The task is to find the length of the longest common substring.
+Input: S1 = "ABCDGH", S2 = "ACDGHR"
+Output: 4
+Explanation: The longest common substring
+is "CDGH" which has length 4
+#USING TOP DOWN APPROACH
+
+T.C -O(N*M)
+S.C-O(N*M)
+
+JAVA CODE:-
+class Solution{
+    int longestCommonSubstr(String S1, String S2, int n, int m){
+         int t[][]=new int[n+1][m+1];
+     
+int res=0;
+      //choice diagram
+      for(int i=1;i<n+1;i++)
+       { 
+           for(int j=1;j<m+1;j++)
+           { if(S1.charAt(i-1)==S2.charAt(j-1))
+                {t[i][j]= 1+t[i-1][j-1];
+                res=Math.max(res,t[i][j]);
+                }
+           
+           }
+       }
+       return res;
+    }
+}
