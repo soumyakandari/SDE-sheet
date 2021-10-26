@@ -32,4 +32,39 @@ ALGO:
 6. do the same for right pointer if a[l]>a[r]
 
 JAVA CODE-
+class Solution {
+    public int trap(int[] height) {
+        int n= height.length;
+        //TWO POINTERS
+        int left=0,right=n-1;
+        int res=0,leftmax=0,rightmax=0;
+        
+        //condition 1
+        while(left<=right)
+    {
+        if(height[left]<=height[right])
+        {
+            //check for leftmax
+            if(height[left]>=leftmax)
+                leftmax= height[left];
+            else 
+                res += leftmax-height[left]; //calculate res
+            
+           left++;
+            
+        }
+        else
+        {
+            if(height[right]>=rightmax)
+                rightmax= height[right];
+            else 
+                res +=rightmax-height[right]; //calculate res
+            
+           right--;
+    
+        }
+    }
+        return res;
+    }
+}
 
