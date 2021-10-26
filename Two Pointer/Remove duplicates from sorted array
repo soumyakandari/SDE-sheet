@@ -13,3 +13,39 @@ Input: nums = [1,1,2]
 Output: 2, nums = [1,2,_]
 Explanation: Your function should return k = 2, with the first two elements of nums being 1 and 2 respectively.
 It does not matter what you leave beyond the returned k (hence they are underscores).
+
+#BRUTE FORCE
+USING HASHSET, AS it doesn't support duplicates
+
+algo-
+1. add all the element in hashset
+2. size of hashset = index upto which array  is required
+3. update the val at arr[i] from hashset . elements are stored in sorted order  in hashset
+
+T.C-O(NLOGN)+O(N)
+S.C-O(N)
+
+#OPTIMAL FORCE
+USING TWO POINTERS
+
+ALGO-
+1. use two pointer i=0, j=1;
+2. check if a[j]!=a[i] //different
+3. increement i and update val at i to val at j
+4. return i+1 //req. sizeof arr
+
+JAVA CODE-
+class Solution {
+    public int removeDuplicates(int[] nums) {
+    if (nums.length == 0) return 0;
+    int i = 0;
+    for (int j = 1; j < nums.length; j++) {
+       //CONDITION to check distinct element
+        if (nums[j] != nums[i]) {
+            i++;//increement i
+            nums[i] = nums[j]; //update val
+        }
+    }
+    return i + 1; //req. size
+}
+}
