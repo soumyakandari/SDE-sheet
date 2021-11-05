@@ -1,1 +1,58 @@
+GIVEN :- let us assume we have a disconnectes graph with some components. with indexing 1. 
+method of storing the graph --> Adjacency ArrayList with N arrayist list.
+
+BFS- TRAVERSING THE ADJACENT NODES AT FIRST
+
+ALGO-
+1. always have a visited array to check appearance of element.
+2. if element not visited then perform bfs
+3. create a queue to store the adjacent element of node.
+4. add that element to the queue, and mark visited
+5. iterate till queue is empty--> node= queue.poll()
+6.add the top of queue i.e node to res
+7. in order to store the adjacent nodes to queue, run a for each loop on the adj arraylist at the index val of "top of queue"
+8. check if that element is visited or not, if not add to queue and mark visited.
+
+T.C -O(N+E)=O(N)
+S.C- O(N+E) + O(N) +O(N)
+
+JAVA CODE-
+
+class solution{
+  public ArrayList<Integer> bfsofGraph(int v, ArrayList<ArrayList<Integer>> adj)
+    {
+      ArrayList<Integer> bfs= new ArrayList<>(); //res
+      boolean vis[] = new boolean [v+1] ;//visited array
+      
+      //for having disconnected components
+      for(int i=1;i<=v;i++)
+        {
+            //check if not visited
+            if(vis[i]==false)
+              {
+                 //bfs code 
+                Queue<Integer> q= new LinkedList<>(); //queue to store adjacent nodes
+                q.add(i);
+                vis[i]=true ;//mark visited
+                
+                while(!q.isEmpty)
+                  {
+                    Integer node= q.poll();//top element 
+                    bfs.add(node);
+                    
+                    //to store adjacent nodes in queue
+                    for(Integer it : adj.get(node))  //run loop in the arraylist at index "node"
+                      {
+                         if(vis[it]==false) //check if not visited to avoid double occurence
+                            { 
+                                vis[it]=true; //update val
+                                q.add(it);
+                             }
+                        }
+                     }
+                 }
+               }
+            return bfs;
+          }
+                 
 
