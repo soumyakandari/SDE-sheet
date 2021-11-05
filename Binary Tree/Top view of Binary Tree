@@ -14,3 +14,70 @@ Note: Return nodes from leftmost node to rightmost node.
 T.C -O(N)
 S.C-O(N)
 
+ALGO-
+1. use a hashmap to maintain the first occurence of each level and its vertical.
+2. Map<Integer,Integer> where key is the vertical no. (unique), value is the node.data
+3. Queue will store the node val in pair of the node and its vertical no.
+4. perform Bfs
+5. store the val from hashmap to the arraylist
+
+JAVA CODE-
+static  class Pair{
+    int ver;
+    Node node;
+  Pair(Node node,int ver)
+     {
+         this.node=node;
+         this.ver=ver;
+     }
+class Solution
+{
+    
+ 
+}
+    //Function to return a list of nodes visible from the top view 
+    //from left to right in Binary Tree.
+    static ArrayList<Integer> topView(Node root)
+    {  ArrayList<Integer> res = new ArrayList<>();
+    
+        //edge case
+        if(root==null)
+          return res;
+        
+        //hashmap to store the vertical no and its first node
+        Map<Integer,Integer> map = new HashMap<>();
+        //queue to store the pair of node and its vertical
+        Queue<Pair> q = new LinkedList<Pair>();
+        //first root will have 0th vertical no
+        q.add(new Pair(root,0));
+        
+        //BFS
+        while(!q.isEmpty())
+        {
+            Pair it= q.poll();
+            Node temp= q.node;
+            int ver= q.ver;
+            
+            //check if it exsist in the map or not
+            if(map.get(ver)==null)
+               map.put(ver,temp.data);
+               
+             //adding child nodes to queue
+            if(temp.left!=null)
+             q.add(temp.left,ver-1);
+            
+            if(temp.right!=null)
+             q.add(temp.right,ver+1);
+            
+        }
+         
+         
+         //store res from hashmap
+         for(Map.Entry<Integer,Integer> e: map.entrySet())
+            res.add(e.getValue());
+            
+    return res;
+        
+        
+    }
+}
