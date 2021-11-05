@@ -1,1 +1,46 @@
+      8
+        /   \    
+      4      12
+    /  \    /  \
+   2    6  10   14
+
+Key: 11  Floor: 10  Ceil: 12
+Key: 1   Floor: -1  Ceil: 2
+Key: 6   Floor: 6   Ceil: 6
+Key: 15  Floor: 14  Ceil: -1
+
+
+  largest val <=key
+  
+ALGO:-
+1. if the key present in BST , return the node
+2. if key < root , go right and let floor = root.data
+3. if key > root, go to left
+
+JAVA CODE-
+class soltuion{
+
+public static int findCeil(TreeNode root, int key)
+{
+   int floor=-1;
+   while(root!=null) 
+     {
+        //if the key present in BST
+        if(key==root.data)
+          {
+             floor= root.data;
+             return ceil;
+            }
+         if(key>root.data)
+           root=root.left;
+           
+        if(key<root.data)
+          {
+             floor= root.data;
+             root=root.right;
+           }
+        }
+      return floor;
+    }
+  }
 
