@@ -1,1 +1,50 @@
+DEPTH FIRST SEARCH
+GIVEN :- let us assume we have a disconnectes graph with some components. with indexing 1. 
+method of storing the graph --> Adjacency ArrayList with N arrayist list.
 
+DFS is a recursive function. just like preorder traversal in trees
+
+ALGO- 
+1. store node val to res
+2. mark visited
+3. call dfs recursion for loop in adj.get(node)
+4. check if not visited, call dfs for that element
+
+T.C -O(N)
+S.C -O(N)
+
+JAVA CODE-
+class solution{
+   
+   public ArrayList<Integer> dfsofGraph(int v, ArrayList<ArrayList<Integer>> adj)
+     {
+       ArrayList<Integer> storedfs= new ArrayList<>(); //res
+       boolean vis[]=new boolean[v+1]; //visited array
+       
+       for(int i=1;i<=v;i++)
+        {
+          if(vis[i]==false)
+            { //perform dfs
+               dfs(i,vis,adj,storedfs);
+             }
+         }
+         
+      return storedfs;
+     }
+   //main dfs function
+   public void dfs(int node, boolean[] vis, ArrayList<ArrayList<Integer>> adj,ArrayList<Integer> storedfs)
+     {
+        //add the node to res
+        storedfs.add(node);
+        vis[node]=true; // mark visited
+        
+        for(Integer it: adj.get(node))
+           {
+              //check if visited or not
+               if(vis[it]==false)
+                 dfs(it,vis,adj,storedfs);
+            }
+       }
+    }
+     
+     
