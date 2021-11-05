@@ -47,3 +47,34 @@ Output :
         prev=root;
     }
 }
+
+
+
+#OPTIMAL FORCE
+ USING ITERATIVE LOOP
+ T.C -O(N)
+ S.C-O(1)
+ 
+ JAVA CODE:-
+ 
+ class solution
+ {
+ public static void flatten(Node root)
+ {  if(root==null)
+        return;
+    curr= root;
+    while(curr!=null)
+     {
+        if(curr.left!=null)
+          {   Node prev= curr.left;
+             //reach the last right node
+             while(prev.right!=null)
+                prev=prev.right;
+                
+              //connect the nodes
+              prev.right=curr.right;
+              curr.right=curr.left;
+           }
+         curr=curr.right;
+       }
+    }
