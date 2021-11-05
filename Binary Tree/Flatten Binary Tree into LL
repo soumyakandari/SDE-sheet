@@ -1,0 +1,49 @@
+Given the root of a binary tree, flatten the tree into a "linked list":
+
+The "linked list" should use the same TreeNode class where the right child pointer points to the next node in the list and the left child pointer is always null.
+The "linked list" should be in the same order as a pre-order traversal of the binary tree.
+ 
+ Input : 
+          1
+        /   \
+       2     5
+      / \     \
+     3   4     6
+
+Output :
+    1
+     \
+      2
+       \
+        3
+         \
+          4
+           \
+            5
+             \
+              6
+              
+              
+    #Better FORCE
+    RECURSIVE TRAVERSAL ---> REVERSE POSTORDER TRAVERSAL
+    RIGHT LEFT  ROOT
+    
+ T.C -O(N)
+ S.C-O(N)
+ 
+ JAVA CODE:-
+ class Solution {
+    TreeNode prev=null;
+    public void flatten(TreeNode root) {
+        if(root==null)
+             return;
+        flatten(root.right);
+       flatten(root.left);
+        
+        //attach to the right
+        root.right=prev;
+        root.left=null;
+        
+        prev=root;
+    }
+}
