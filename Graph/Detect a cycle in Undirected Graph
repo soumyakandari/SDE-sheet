@@ -1,1 +1,36 @@
+DETECT A CYCLE IN AN UNDIRECTED GRAPH that may have components
+Given :-  adjacency list , no. of nodes i.e v
 
+#USING BFS TRAVERSAL 
+
+algo-
+1. maintain a  record of curr node and its prev in queue
+2. if node  is visited but not equals to prev. then cycle exsist
+
+T.C -O(N)
+S.C- O(N)
+
+
+JAVA CODE-
+
+//class for node
+class Node{
+  
+  int first;
+  int second;
+  public Node(int first ,int second)
+     {
+       this.first=first;
+       this.second =second;
+      }
+   }
+   
+  class solution{
+    static boolean checkcyclicgraph(int v, ArrayList<ArrayList<Integer>> adj)
+    {
+      //visited array
+      boolean vis[]= new boolean [v+1];
+      Arrays.fill(vis,false);
+      
+      //for component
+      
