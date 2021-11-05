@@ -33,4 +33,46 @@ class Node{
       Arrays.fill(vis,false);
       
       //for component
+      for(int i=1;i<=v;i++)
+      {
+        if(vis[i]==false)
+          {
+            if(iscyclic(i,adj,vis))
+              return true;
+           }
+        }
+     return false;
+     }
+    static boolean iscyclic(int node,ArrayList<ArrayList<Integer>> adj,boolean vis[])
+      {
+         //queue to store both curr and prev nodes
+         Queue<Node> q= new LinkedList<>();
+          //first element will not have a prev node
+          q.add(new Node(node,-1));
+          viss[node]=true; //marked visited
+          
+          while(!q.isEmpty())
+           {
+              int curr= q.peek().first;  //store curr node
+              int par= q.peek().second;  //store parent node
+              q.poll(); //remove top
+              
+              //check for adjacent nodes
+              for(Integer it:adj.get(node))
+                {
+                   if(vis[it]==false)
+                     {
+                        vis[it]=true;
+                        q.add(new Node(it,curr);
+                       }
+                     //else if the element is visited and not equal to prev 
+                     else if(par!=it)
+                       return true; //cycle found
+                 }
+              }
+             
+             return false;
+          }
+      }
       
+    
