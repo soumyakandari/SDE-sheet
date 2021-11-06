@@ -1,0 +1,55 @@
+You are given the root node of a binary search tree (BST) and a value to insert into the tree. Return the root node of the BST after the insertion. 
+It is guaranteed that the new value does not exist in the original BST.
+
+Notice that there may exist multiple valid ways for the insertion, as long as the tree remains a BST after insertion. You can return any of them.
+Input: root = [4,2,7,1,3], val = 5
+Output: [4,2,7,1,3,5]
+Explanation: Another accepted tree is:
+
+T.C -O(LOGN)
+
+ALGO-
+1. check where can the val be inserted 
+2. inseet into the leaf positions
+
+JAVA CODE:=
+class Solution {
+    public TreeNode insertIntoBST(TreeNode root, int val) {
+        //if the BST is empty
+        if(root==null)
+            return new TreeNode(val);
+        
+        //curr node-->>root
+        TreeNode curr= root;
+        while(true)
+        {
+            if(curr.val<=val) //move to right  4<5
+            {
+                //move towards right last
+                if(curr.right!=null)
+                    curr= curr.right;
+                else //leaf
+                {
+                   //create new node and add
+                    curr.right= new TreeNode(val);
+                    break;
+                }
+            }      
+            else //curr.val>val
+            {
+                //move towards left last
+                if(curr.left!=null)
+                    curr= curr.left;
+                else //leaf
+                {
+                   //create new node and add
+                    curr.left= new TreeNode(val);
+                    break;
+                }
+            }      
+            
+        }
+        return root;
+        
+    }
+}
