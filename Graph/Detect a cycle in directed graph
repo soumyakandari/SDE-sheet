@@ -1,0 +1,50 @@
+ALGO-
+1. maintain two list , visited[] and dfsvis[]
+2. dfsvis [] for dfs call for that particular node
+3. condition to detect cycle, if vis[node]==dfs[node]==1
+
+T.C -O(N+E)
+S.C- O(2N)
+
+JAVA CODE:-
+class solution {
+public boolean iscyclic(int v, ArrayList<ArrayList<Integer>> adj)
+   {
+      //create two list
+      int vis[] = new int[v+1];
+      int dfsvis[]= new int[v+1];
+      
+      //for components
+      for(int i=1;i<=v;i++)
+      {
+         if(vis[i]==0)
+           {
+           if(checkcyclic(i,adj,vis,dfsvis))
+               return true;
+            }
+       }
+   return false;
+   }
+   
+private boolean checkcyclic(int node, ArayList<ArrayList<Integer>> adj , int[] vis, int[] dfsvis)
+   {
+      //mark visited
+      vis[node]=1;
+      dfsvis[node]=1;
+      
+      for(Integer it: adj.get(node))
+         {
+            if(vis[it]==0)//not visited
+               {
+                  //dfs call
+                  if(checkcyclic(it,adj,vis,dfsvis))
+                     return true;
+                 }
+               else if(dfsvis[it]==1) //already visited in previous dfs calls
+                 return true;
+          }
+         //after each dfs call , mark 0 to nodes
+            dfsvis[node]=0;
+            return false;
+        }
+    }
