@@ -25,3 +25,46 @@ class Solution {
     return nums.get(k - 1);
   }
 }
+
+
+#using stack approach
+T.C -O(N)
+S.C -O(N)
+
+ALGO-
+1. smallest element will always be on left side. add left nodes to stack
+2. node= stack.pop(), count++
+3. if count==k , return node.val
+4. if stack is empty --> break
+
+JAVA CODE-
+
+class Solution {
+  public int kthSmallest(TreeNode root, int k) {
+   if(root==null)
+         return -1;
+     Stack<TreeNode> stack = new Stack<TreeNode>();
+      TreeNode node= root;
+      int c=0;
+      while(true)
+      {
+          if(node!=null)
+          {
+              stack.push(node);
+              node= node.left;
+          }
+          else
+          {
+              if(stack.isEmpty())
+                   break;
+              
+              node= stack.pop();
+              c++;
+              if(c==k)
+                  return node.val;
+              node= node.right;
+          }
+        }
+     return -1;
+  }
+}
