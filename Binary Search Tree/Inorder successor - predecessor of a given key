@@ -1,1 +1,57 @@
+Given a BST, and a reference to a Node x in the BST. Find the Inorder Successor of the given node in the BST.
+Input:
+      2
+    /   \
+   1     3
+K(data of x) = 2
+Output: 3 
+Explanation: 
+Inorder traversal : 1 2 3 
+Hence, inorder successor of 2 is 3.
 
+
+#BRUTE FORCE
+1. store the inorder in list
+2. traverse through list and find the imidiate largest val to given key
+
+T.C -O(N) + O(N)
+S.C - O(N)
+
+#BETTER FORCE
+1. Traverse inorder in the BST
+2. find first node > given key
+
+T.C -O(N)
+S.C-O(1)
+
+#OPTIMAL FORCE
+1. Store a variable called successor -->null initially
+2. use BST logic , if the given key > root.val move right, otherwise left
+3. as soon as we find the val> key ---> possible ans
+4. we need the least greater element to key , so move left
+
+T.C -O(H)
+S.C-O(1)
+
+JAVA CODE:-
+class Solution
+{
+    // returns the inorder successor of the Node x in BST (rooted at 'root')
+	public Node inorderSuccessor(Node root,Node x)
+         {
+           Node successor = null;
+           while(root!=null)
+           {
+               //move right
+               if(x.data>=root.data)
+                  root=root.right;
+                else{
+                    //store the ans
+                    successor = root;
+                    root=root.left;
+                    
+                }
+           }
+          return successor;
+         }
+}
