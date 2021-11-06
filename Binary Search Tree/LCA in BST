@@ -1,0 +1,30 @@
+Given a binary search tree (BST), find the lowest common ancestor (LCA) of two given nodes in the BST.
+
+According to the definition of LCA on Wikipedia: “The lowest common ancestor is defined between two nodes p and q as the lowest node in T that has both p and q as descendants (where we allow a node to be a descendant of itself).”
+
+#USING RECURSION
+ALGO -
+1. IF BOTH p and q are smaller than current node , move towards left
+2. otherwise , move towards right
+3. The point of separation will be the ans , i.e LCA
+
+T.C -O(H)
+S.C-O(1)
+
+JAVA CODE:-
+class Solution {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if(root==null)
+            return null;
+        //CURRENT NODE
+        int curr= root.val;
+        //condition to check for separation
+        if(curr>p.val && curr>q.val) //move towards left
+            return lowestCommonAncestor(root.left,p,q);
+     
+          if(curr<p.val && curr<q.val) //move towards right
+            return lowestCommonAncestor(root.right,p,q);
+        
+    return root;
+    }
+}
