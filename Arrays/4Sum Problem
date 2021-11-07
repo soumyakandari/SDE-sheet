@@ -29,3 +29,61 @@ T.C -O(N^3)
 S.C-O(1)
 
 JAVA CODE-
+class Solution {
+    public List<List<Integer>> fourSum(int[] num, int target) {
+        //RES
+        List<List<Integer>> res= new ArrayList<>();
+        //edge case
+        if(num==null || num.length==0)
+             return res;
+        int n= num.length;
+        //sort the array
+        Arrays.sort(num);
+        for(int i=0;i<n;i++)
+        {
+            for(int j=i+1;j<n;j++)
+            {
+                //remaining sum
+                int target2= target -num[i]-num[j];
+                //two pointer to find target2
+                int left = j+1;
+                int right= n-1;
+                
+                //binary search
+                while(left<right)
+                {
+                    int twosum= num[left]+num[right];
+                    if(twosum<target2)
+                        left++;
+                    else if(twosum>target2)
+                        right--;
+                    
+                    else{
+                        //found, add to res
+                        List<Integer> quad= new ArrayList<>();
+                        quad.add(num[i]);
+                        quad.add(num[j]);
+                        quad.add(num[left]);
+                        quad.add(num[right]);
+                        res.add(quad);
+                        
+                        //move the pointer ahead, and skip duplicates
+                        while(left<right && num[left]==quad.get(2))
+                            ++left;
+                        
+                          while(left<right && num[right]==quad.get(3))
+                            --right;   
+                       }
+                   }
+                
+                //move the j pointer ahead , skip duplicates
+                while(j+1<n &&num[j+1]==num[j])
+                     ++j;
+            }
+            //move i pointer ahead
+            while(i+1<n &&num[i+1]==num[i])
+                     ++i;
+        }
+        return res;
+    }
+}
