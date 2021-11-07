@@ -18,4 +18,54 @@ S.C-O(n)
 AUXILAIRY SPACE FOR RECURISON - O(N)
 
 Algo -
-1. 
+1. perform a dfs for topo
+2. simply add all the dfs call ended nodes to --stack
+3. now stack will be having the topo sort in LIFO form
+4 pop element from stack --add to res
+
+JAVA CODE-
+class Solution
+{
+    //Function to return list containing vertices in Topological order. 
+    static int[] topoSort(int V, ArrayList<ArrayList<Integer>> adj) 
+    {
+        // srtack to store the vertices 
+        Stack<Integer> stack = new Stack<>();
+        // viisted array
+        int [] vis= new int[V];
+        
+        for(int i=0;i<V;i++)
+        {
+            if(vis[i]==0)
+               {
+                   //dfs
+                   findtopo(i,vis,adj,stack);
+               }
+        }
+        //stack to result
+        int [] topo= new int[V];
+        int index=0;
+        while(!stack.isEmpty())
+          {
+              topo[index]= stack.pop();
+              index++;
+          }
+          return topo;
+    }
+    
+    static void findtopo(int node, int[] vis,ArrayList<ArrayList<Integer>> adj,Stack<Integer>stack )
+    {
+        //mark viisted
+        vis[node]=1;
+        for(Integer it:adj.get(node))
+           {
+               //if the node is not visited , dfs call
+               if(vis[it]==0)
+                   findtopo(it,vis,adj,stack);
+           }
+           //after each dfs call is ended  add the node into the stack
+           stack.push(node);
+        
+    }
+}
+
