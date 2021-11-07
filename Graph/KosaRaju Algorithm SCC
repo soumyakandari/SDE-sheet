@@ -1,1 +1,94 @@
+Given a Directed Graph with V vertices (Numbered from 0 to V-1) and E edges, Find the number of strongly connected components in the graph.
+Input:
 
+Output:
+3
+
+#USING DFS + TOPOSORT +STACK 
+
+KOSARAJU'S ALGO-
+1. sort the graph nodes acc to their finish time --> toposort
+2. transpose the graph --> reverse the edges
+3. perform dfs call on the toposort stack and the new graph transpose
+4. print the nodes at the time of dfs 
+
+T.C - 1. O(N)
+       2. O(N+E)
+       3. O(N+E)
+S.C - 1.O(N+E)  //TRANSPOSE GRAPH
+      2. O(N)  //STACK
+      3. O(N) //RECURSION
+
+JAVA CODE:-
+class Solution
+{
+    //Function to find number of strongly connected components in the graph.
+    public int kosaraju(int n, ArrayList<ArrayList<Integer>> adj)
+    {
+        //res
+        int res=0;
+        //viisted array
+        int vis[]= new int[n];
+        Stack<Integer> st= new Stack<>();//stack for topo sort
+        //step 1: toposort
+        for(int i=0;i<n;i++)
+        {
+            if(vis[i]==0)
+               toposort(i,vis,adj,st);
+        }
+        
+        //step 2: transpose the graph
+        ArrayList<ArrayList<Integer>> transpose= new ArrayList<>();
+        //add empty list
+        for(int i=0;i<n;i++)
+           transpose.add(new ArrayList<Integer>());
+           
+        //reversing the direction of edges
+        for(int i=0;i<n;i++)
+        {
+            vis[i]=0;//again mark all the edges unviisted
+            for(Integer it: adj.get(i)) //u-> change to v->u
+                 transpose.get(it).add(i);
+        }
+        
+        //step 3: DFS reverse acc to toposort
+        while(!st.isEmpty())
+        {
+            int node= st.pop();
+            //dfs 
+            if(vis[node]==0)
+               {
+                   revdfs(node,vis,transpose);
+                   res++;
+               }
+        }
+        return res;
+    }
+    //step 2 to find the toposort
+    public void toposort(int node, int[]vis,ArrayList<ArrayList<Integer>> adj,Stack<Integer> st )
+       {
+           //mark visited
+           vis[node]=1;
+           for(Integer it:adj.get(node))
+           {
+               if(vis[it]==0)
+                  toposort(it,vis,adj,st);
+           }
+        //add to stack after one dfs call ends
+        st.push(node);
+       }
+     //step 3: DFS CALL
+     public void revdfs(int node, int[]vis,ArrayList<ArrayList<Integer>> transpose)
+       {
+          //mark viisted
+          vis[node]=1;
+          //print the scc component
+          //sysout(node);
+          for(Integer it: transpose.get(node))
+             {
+                 if(vis[it]==0)
+                    revdfs(it,vis,transpose);
+             }
+         
+       }
+}
