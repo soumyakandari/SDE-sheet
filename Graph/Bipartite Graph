@@ -10,3 +10,65 @@ Return true if and only if it is bipartite.
 Input: graph = [[1,2,3],[0,2],[0,1,3],[0,2]]
 Output: false
 Explanation: There is no way to partition the nodes into two independent sets such that every edge connects a node in one and a node in the other.
+
+#USING DFS 
+ALGO-
+1.create a color array that will store the color of the node index
+2. dfs call if the node is not colored
+3. color the adj node--> opp of the node , then call dfs
+4. if the adj node already colored check if color[it]==color[node] -->not bipartite
+5. if the adjacent nodes are different color then bipartite graph
+
+T.C- O(N+E)
+S.C- O(N+E)//GRAPH
+      O(N) //COLOR[]
+      O(N)// RECURSION
+      
+JAVA CODE-
+
+NOTE- GRAPH IS REPRESENTED USING MATRIX INSTEAD OF ADJ LIST
+
+class Solution {
+    public boolean isBipartite(int[][] graph) {
+        //color array
+      int n= graph.length;
+        int []color= new int[n];
+        //initailize array with -1;
+        for(int i=0;i<n;i++)
+             color[i]=-1;
+        for(int i=0;i<n;i++)
+        {    //if not colored yet
+            if(color[i]==-1)
+            {
+                if(!checkbipartite(i,color,graph))
+                     return false;
+                
+            }
+        }
+        return true;
+    }
+    //dfs call to check bipartite
+    public boolean checkbipartite(int node,int[] color, int[][]adj)
+    {
+        //for the first node 
+        if(color[node]==-1)
+            color[node]=1;
+        
+        for(Integer it : adj[node])
+        {
+            //if its not colored 
+            if(color[it]==-1)
+            {
+                color[it]=1-color[node];
+                //dfs call
+                if(!checkbipartite(it,color,adj))
+                    return false;
+            }
+            //if adjacent nodes have same color
+            else if(color[it]==color[node])
+                return false;
+    
+        }
+        return true;
+    }
+}
