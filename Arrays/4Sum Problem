@@ -1,0 +1,31 @@
+Given an array nums of n integers, return an array of all the unique quadruplets [nums[a], nums[b], nums[c], nums[d]] such that:
+
+0 <= a, b, c, d < n
+a, b, c, and d are distinct.
+nums[a] + nums[b] + nums[c] + nums[d] == target
+You may return the answer in any order.
+
+ Input: nums = [1,0,-1,0,-2,2], target = 0
+Output: [[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]
+
+#BRUTE FORCE
+ ALGO-
+ 1. sort the array
+ 2.use 3 sum approach , 3 pointer 
+ 4. store the sum in hashset and for quad use hashset
+ 
+ T.C -O(N^3LOGN) +O(LOGN)
+ S.C -O(1)
+ 
+ #OPTIMAL FORCE
+ ALGO-
+ 1. SORt the array
+ 2. use 2 pointer approach , remaining = target- i-j
+ 3. use another 2 pointer to find remaining target using binary search
+4. if target found , add to res and move all pointer ahead
+5. make sure to skip the duplicates
+
+T.C -O(N^3)
+S.C-O(1)
+
+JAVA CODE-
