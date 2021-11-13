@@ -1,0 +1,51 @@
+GIVEN- Graph with edges having unit weights, and  a source node from where distance is to be calculated
+output -  return array of distance from source to all other nodes
+
+#USING BFS AND DISTANCE ARRAY
+
+ALGO-
+1. maintain a distance arraya of N and mark all the distance to max 
+2. for bfs queue. add the source node and mark distance at src index=0;
+3. During BFS call, check if the distance for adj node is greater than its prev val
+4. update the val.
+5. return Dist array
+
+T.C -O(N+E)
+S.C - O(N)//DISTANCE ARRAY + O(N) // QUEUE + O(N+E) //ADJ LIST
+
+JAVA CODE-
+
+class solution{ 
+    public int[] shortestpath(int n, ArrayList<ArrayList<Integer>> adj,int src) 
+      {
+          //distance array
+          int[] dist = new int [n];
+          //mark distance max
+          for(int i=0;i<n;i++)
+             dist[i]=100000;
+             
+         //queue 
+         Queue<Integer> q= new LinkedList<>();
+         
+         //mark the distance for the src 
+         dist[src]=0;
+         q.add(src);
+         
+         //BFS CALL
+         while(!q.isEmpty())
+          {
+            int node= q.poll();
+            for(int it: adj.get(node))
+               {
+                  //check if distance can be updated
+                  if(dist[node]+1 <dist[it])
+                      {
+                      //update distance
+                          dist[it]= dist[node]+1;
+                          q.add(it);
+                        }
+                }
+            }
+         return dist;
+        }
+    }
