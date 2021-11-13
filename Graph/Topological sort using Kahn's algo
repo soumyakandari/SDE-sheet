@@ -1,0 +1,58 @@
+Given a Directed Acyclic Graph (DAG) with V vertices and E edges, Find any Topological Sorting of that Graph.
+
+#USING KAHN'S ALGO // QUEUE +BFS
+T.C -O(N+E)
+S.C-O(N) //QUEUE +O(N) //TOPOARRAY
+
+ALGO -
+1.create a array of all the indegree of nodes
+2. if indegree =0 , add to queue
+3. perform BFS, add the node to topo arr, and decreement the indegree no of adj nodes .
+4. check again for indegree if its 0 add adj node to queue
+
+JAVA CODE-
+class solution {
+ public static int[] toposort(int N, ArrayList<ArrayList<Integer>> adj)
+   {
+      //create topo array for ans
+      int[] topo = new int[n];
+      //indegree array
+      int [] indegree= new int[n];
+      
+      //STEP 1- COUNT INDEGREE
+       for(int i=0;i<n;i++)
+         {
+            for(Integer it: adj.get(i))
+                indegree[it]++;
+          }
+       //queue for BFS
+       Queue<Integer> q= new LinkedList<>();
+      
+      //STEP 2 - add 0 indegree nodes to queue
+      for(int i=0;i<n;i++){
+         if(indegree[i]==0)
+           q.add(i);
+       
+       int index=0;
+       //STEP 3 - BFS CALL
+       while(!q.isEmpty())
+          {
+             Integer node=q.poll();
+             //add to topo array
+             topo[index]= node;
+             index++;
+             
+             //adj nodes
+             for(Integer it: adj.get(node))
+                {
+                   //decrease indegree
+                   indegree[it]--;
+                   //add if 0
+                   if(indegree[it]==0)
+                     q.add(it);
+                 }
+            }
+        return topo;
+       }
+   }
+            
