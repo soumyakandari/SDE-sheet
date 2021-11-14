@@ -1,1 +1,76 @@
+SHORTEST PATH IN UNDIRECTED GRAPH WITH WEIGHTS
+#USING DIJKSTRA'S ALGO +BFS + PQ
 
+ALGO- 
+1. use a min heap to store the (node, dist)
+2. min heap based on the node val
+3. distance array as usual with max val of elements , dis[source]=0
+4. Perform BFS using PQ
+5. update for distance and then add that entry to PQ
+
+T.C -(N+E)LOGN = O(NLOGN)
+S.C -O(N)+O(N)+O(N+E)
+
+JAVA CODE-
+class Node implements comparator<Node>{
+  int v; int w; 
+  Node(int v, int w)
+  { this.v=v;
+    this.w=w;
+   }
+int getv()
+   return v;
+ int getweight()
+    return w;
+    
+  //comparator 
+  @override
+  public int compare(Node node1,Node node2)
+    {
+     if(node1.w<node2.w)
+        return -1;
+     if(node1.w> node2.w)
+       return 1;
+     return 0;
+    }
+ }
+ 
+ class sol{
+   public int[] shortestpath(int src, int N, ArrayList<ArrayList<Node>> adj)
+   {
+      //distance array
+      int dis[]= new int[N];
+      //mark max val
+       for(int i=0;i<N;i++)
+          dis[i]=100000;
+       //mark src distance =0
+       dis[src]=0;
+       
+       //PQ -->MINHEAP
+       PriorityQueue<Node> pq= new PriorityQueue<Node>(N,new Node());
+         //add first entry into minheap 
+           //minheap(node, distance)
+           
+        pq.add(new Node(src,0));
+        
+        //BFS CALL
+        while(pq.size()>0)
+          {
+             Node node= pq.poll();
+             //adj nodes
+             for(Node it:adj.get(node.getv()))
+                {
+                   //check for dist
+                   if(dis[node.getv()]+ it.getweight() <dis[it.getv()])
+                     {
+                        //update distance
+                         dis[it.getv()]= dis[node.getv()] +it.getweight();
+                         //add entry to minheap
+                         pq.add(new Node(it.getv(), dis[it.getv()]);
+                         
+                       }
+                   }
+             }
+         return dis;
+       }
+    }
