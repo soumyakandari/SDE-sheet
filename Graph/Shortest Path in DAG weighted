@@ -1,1 +1,87 @@
+TO FIND THE SHORTEST PATH IN A DIRECTED ACYCLIC GRAPH WITH WEIGHTS
 
+NOW, ArrayList will be of Pair<v,wt> instead of just Integer
+#USING TOPO SORT, BFS
+ALGO- 
+1. Find the topo sort , maintain a stack
+2. create a distance arr and initailise by Integer.MAX_VALUE;
+3. mark distance for source =0;
+4. now perform bfs on the stack
+5. for each adj node if the distance is less than dist[node] then update
+
+T.C -O(N+E)
+S.C - O(N)
+
+JAVA CODE-
+class solution 
+{
+//class pair for both v and weight
+class Pair{
+  int v; int w;
+  Pair(int v, int w){
+  this.v=v;
+  this.w=w;
+  }
+  int getv()
+     return v;
+   int getweight()
+      return w;
+  }
+ 
+//function for shortest path
+public int[] findshortestpath(int N, ArrayList<ArrayList<Pair>> adj, int src)
+  {  
+     //TOPO stack
+     Stack st= new Stack();
+     //distance array
+      int dis[]=  new int[N];
+      //vis array for topo sort
+      int [] vis= new int[n];
+      
+      //initialise all distance element =max
+      for(int i=0;i<N;i++)
+         dis[i]= Integer.MAX_VALUE;
+       
+       //STEP 1- TOPOSORT
+       for(int i=0;i<n;i++)
+          {
+             if(vis[i]==0)
+               toposort(i,vis,adj,st);
+           }
+        //STEP 2 - mark distance for source 0
+        dis[src]=0;
+        
+        //STEP 3- BFS CALL WITH STACK TOPO
+        while(!st.isEmpty())
+           {
+             int node = st.pop();
+             //if node has been previously reached
+              if(dis[node]!=Integer.MAX_VALUE)
+                 {
+                    //CALL FOR ADJ NODES
+                    for(Pair it:adj.get(node))
+                      {
+                        //update the distance
+                        if(dis[node] + it.getweight() <dist[it.getv()]){
+                           dis[it.getv()]= dis[node]+it.getweight();
+                           }
+                       }
+                   }
+               }
+          return dis;
+       }
+   //TOPO SORT
+    public void toposort(int node, int[] vis, ArrayList<ArrayList<Pair>> adj, Stack st)
+       {
+           vis[node]=1;
+           for(Pair it : adj.get(node))
+              {   if(v[it.getv()]==0){
+                    toposort(it.getv(), vis,adj,st);
+                  }
+               }
+          st.add(node);
+       }
+   }
+               
+                  
+                                
