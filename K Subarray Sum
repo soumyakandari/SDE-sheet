@@ -1,0 +1,96 @@
+Given an integer array arr of size N and two integers K and M, the task is to find M largest sums of K sized subarrays. 
+
+Input:
+1. The first line of the input contains a single integer T denoting the number of test cases. The description of T test cases follows.
+2. The first line of each test case contains three integers N, K, and M.
+3. The next line contains N space-separated integers.
+
+
+Output: For each test case, print M space-separated integers (Print the sums from the maximum to minimum)
+
+Example:
+Input:
+2
+5 2 3
+10 11 10 11 12
+5 5 1
+1 2 3 4 5
+ 
+ 
+AlGo-
+1. use sliding window to cal subarray sum of size k
+2. add the sum in PQ/*package whatever //do not write package name here 
+3. return max 'M' element for PQ
+
+T.C- O(NLOGM)
+S.C- O(N)
+
+JAVA CODE-
+
+*/
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class GFG {
+	public static void main (String[] args) {
+		//code
+		//m --> size of PQ
+		//k---- sum of those numbers
+		//add all the k subarray sum into PQ
+		//using sliding window
+		Scanner sc= new Scanner(System.in);
+		int t=sc.nextInt();
+		for(int j=0;j<t;j++)
+		{
+		    //input parameters
+		    int n=sc.nextInt();
+		    int k=sc.nextInt();
+		    int m=sc.nextInt();
+		    int arr[]= new int [n];
+		    //input array
+		    for(int i=0;i<n;i++)
+		      arr[i]=sc.nextInt();
+		     //ans
+		     int res[]=new int[m];
+		     res=solve(arr,n,k,m);
+		     for(int i=0;i<m;i++)
+		        System.out.print(res[i]+" ");
+		      
+		   System.out.println();
+		  
+		}
+	    
+	}
+	public static int[] solve(int[] arr,int n,int k ,int m)
+	    {
+	        PriorityQueue<Integer> maxheap= new PriorityQueue<>((a,b)->b-a);
+	        int i=0;
+	        int sum=0;
+	        int j=0;
+	        while(j<n)
+	          {
+	             sum=sum+arr[j];
+	             
+	             if((j-i+1)==k)
+	               {
+	                   maxheap.add(sum);
+	                   sum=sum-arr[i];
+	                   i++;
+	                   j++;
+	           
+	               }
+	           if((j-i+1)<k)
+	               j++;
+	          }
+	         //add res
+	         int res[]= new int[m];
+	         for(int v=0;v<m;v++)
+	          {
+	              res[v]=maxheap.poll();
+	          }
+	           return res;
+	       
+	    }
+}
