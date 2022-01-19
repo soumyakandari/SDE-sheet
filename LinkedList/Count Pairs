@@ -2,3 +2,35 @@ Given two linked list of size N1 and N2 respectively of distinct elements, your 
 Note: The 2 numbers of a pair should be parts of different lists.
 
 Example 1:
+Input:
+L1 = 1->2->3->4->5->6
+L2 = 11->12->13
+X = 15
+Output: 3
+Explanation: There are 3 pairs that
+add up to 15 : (4,11) , (3,12) and (2,13)
+
+USING HASHSET
+T.C- O(N)
+S.C -O(N)
+
+JAVA CODE-
+class Solution {
+
+    public static int countPairs(LinkedList<Integer> head1, LinkedList<Integer> head2,
+                          int x) {
+        // add your code here
+        HashSet<Integer> num= new HashSet<>();
+        int n=head2.size();
+        for(int i=0;i<n;i++)
+            num.add(head2.get(i));
+        int count=0;
+        for(int j=0;j<head1.size();j++)
+        {
+            int target=x-head1.get(j);
+            if(num.contains(target))
+                 count++;
+        }
+        return count;    
+    }
+}
