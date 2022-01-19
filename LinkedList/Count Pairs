@@ -1,0 +1,4 @@
+Given two linked list of size N1 and N2 respectively of distinct elements, your task is to complete the function countPairs(), which returns the count of all pairs from both lists whose sum is equal to the given value X.
+Note: The 2 numbers of a pair should be parts of different lists.
+
+Example 1:
