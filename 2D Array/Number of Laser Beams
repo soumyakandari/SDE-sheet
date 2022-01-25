@@ -24,3 +24,28 @@ This is because the 2nd row contains security devices, which breaks the second c
 
 T.C -O(N)
 S.C -O(N)
+
+class Solution {
+    public int numberOfBeams(String[] bank) {
+        int c=0;
+        int beam=0;
+        int n=bank.length;
+        ArrayList<Integer> arr= new ArrayList<>();
+        for(int i=0;i<n;i++)
+        {   c=0;
+            for(char j : bank[i].toCharArray())
+            {
+                if(j=='1')
+                    c++;
+            }
+         if(c!=0)
+            arr.add(c);   
+        }
+        int s=arr.size();
+        for(int i=0;i<s-1;i++)
+        {
+            beam=beam+arr.get(i)*arr.get(i+1);
+        }
+        return beam;
+    }
+}
