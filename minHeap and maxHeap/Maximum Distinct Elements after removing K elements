@@ -7,3 +7,58 @@ Output : 4
 Explanation:
 Remove 2 occurrences of element 5 and 
 1 occurrence of element 2.
+
+T.C - O(KLOGD)
+S.C -O(N)
+
+ALGO-
+1. hashmap for counting freq of each elements
+2. use maxheap to reduce k elements from the most freq num
+3. return the size of maxheap left
+
+
+JAVA CODE-
+
+class Solution{
+    class pair{
+        int num;
+        int freq;
+        public pair(int num,int freq)
+        {
+            this.num=num;
+            this.freq=freq;
+        }
+    }
+  
+    int maxDistinctNum(int a[], int n, int K)
+    {
+        HashMap<Integer,Integer> map= new HashMap<>();
+        for(int i:a)
+           map.put(i,map.getOrDefault(i,0)+1);
+           
+        PriorityQueue<Map.Entry<Integer,Integer>> maxheap = new PriorityQueue<>((n1,n2)->n2.getValue()-n1.getValue());
+        
+    // add all map entry to heap
+    maxheap.addAll(map.entrySet());
+           
+        Map.Entry<Integer,Integer> prev=null;
+        int size=0;
+        
+        while(size!=K)
+        {
+             Map.Entry<Integer,Integer> temp= maxheap.poll();
+             //reduce one val freq
+             prev= temp;
+             prev.setValue(prev.getValue()-1);
+             size++;
+             if(prev.getValue()!=0)
+                maxheap.add(prev);
+     
+        }
+        
+        
+        return maxheap.size();
+        
+    }
+     
+}
