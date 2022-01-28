@@ -1,0 +1,6 @@
+Given a string, say S, print it in reverse manner eliminating the repeated characters and spaces.
+
+Example 1:
+
+Input: S = "GEEKS FOR GEEKS"
+Output: "SKEGROF"
