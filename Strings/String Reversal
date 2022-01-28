@@ -4,3 +4,26 @@ Example 1:
 
 Input: S = "GEEKS FOR GEEKS"
 Output: "SKEGROF"
+
+#USING HASHSET
+
+JAVA CODE-
+class Solution
+{
+    public String reverseString(String s)
+    {
+        //code here.
+        String res="";
+        HashSet<Character> set= new HashSet<>();
+        for(int i=s.length()-1;i>=0;i--)
+        {   int str= s.charAt(i);
+            if(str!=32 && !set.contains(s.charAt(i)))
+               {
+                   //add to res and set
+                   res=res+s.charAt(i);
+                   set.add(s.charAt(i));
+               }
+        }
+        return res;
+    }
+}
