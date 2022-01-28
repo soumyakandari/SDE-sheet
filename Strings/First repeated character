@@ -1,0 +1,34 @@
+Given a string S. The task is to find the first repeated character in it. We need to find the character 
+that occurs more than once and whose index of second occurrence is smallest. S contains only lowercase letters.
+
+Example 1:
+
+Input: S="geeksforgeeks"
+Output: e
+Explanation: 'e' repeats at third position.
+
+#USING HASHSET
+
+JAVA CODE-
+class Solution 
+{ 
+    String firstRepChar(String s) 
+    { 
+        // code here
+        String res="";
+        HashSet<Character> set= new HashSet<>();
+        for(char i: s.toCharArray())
+        {
+            if(set.contains(i))
+                {
+                    res=res+i;
+                    return res;
+                }
+            else 
+              set.add(i);
+            
+        }
+        res="-1";
+        return res;
+    }
+} 
