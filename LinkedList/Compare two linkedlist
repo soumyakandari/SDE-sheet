@@ -1,0 +1,54 @@
+Input:
+First line of input contains number of testcases T. For each testcase, there will be 4 lines of input. First line of which contains length of first linked list and next line contains the linked list, similarly next two lines contains length and linked list respectively.
+
+Output:
+Comapare two strings represented as linked list.
+Input:
+2
+5
+a b a b a
+4
+a b a a
+3
+a a b
+3
+a a b
+
+Output:
+1
+0
+
+Explanatio
+
+JAVA CODE-
+class GfG
+{
+    int compare(Node node1, Node node2)
+    {
+      //Your code here
+      String a="";
+      String b="";
+      while(node1!=null)
+      {
+          a=a+node1.data;
+          node1=node1.next;
+      }
+      while(node2!=null)
+      {
+          b=b+node2.data;
+          node2=node2.next;
+      }
+     int x= a.compareTo(b);
+     if(x==0)
+       return 0; //same
+       //a>b
+      if(x>0)
+         return 1;
+         //a<b
+    
+        return -1;
+        
+
+
+    }
+}
