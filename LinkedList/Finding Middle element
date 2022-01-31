@@ -13,3 +13,30 @@ Explanation:
 Middle of linked list is 3.
 
 JAVA CODE-
+
+class Solution
+{
+    int getMiddle(Node head)
+    {
+         // Your code here.
+         int n=0;
+         Node dum=head;
+         while(dum!=null)
+         {
+             n++;
+             dum=dum.next;
+         }
+         int mid= n/2;
+         int i=0;
+         while(head!=null)
+         {  if(i==mid)
+               return head.data;
+               
+             i++;
+             
+             head=head.next;
+             
+         }
+         return -1;
+    }
+}
