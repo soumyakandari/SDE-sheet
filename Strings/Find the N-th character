@@ -1,0 +1,16 @@
+Given a binary string S . Perform R iterations on string S, where in each iteration 0 becomes 01 and 1 becomes 10. Find the Nth character (considering 0 based indexing) of the string after performing these R iterations. 
+(See Examples for better understanding)
+
+Input:
+S = 101
+R = 2 
+N = 3
+Output:
+1
+Explanation : 
+After 1st iteration S becomes 100110.
+After 2nd iteration, S = 100101101001
+Now, we can clearly see that the character
+at 3rd index is 1, and so the output.
+
+JAVA CODE-
