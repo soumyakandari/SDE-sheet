@@ -14,3 +14,25 @@ Now, we can clearly see that the character
 at 3rd index is 1, and so the output.
 
 JAVA CODE-
+class Solution
+{
+    public char nthCharacter(String S, int R, int N)
+    { 
+        String res="";
+        for(int j=0;j<R;j++){
+        for(int i=0;i<S.length();i++)
+        {
+            if(S.charAt(i)=='0')
+               res=res+"01";
+            if(S.charAt(i)=='1')
+               res=res+"10";
+        }
+        S=res;  //re initiatize string s
+        res="";  //new string res
+        }
+        char ans= S.charAt(N);
+        return ans;
+        
+        
+    }
+}
