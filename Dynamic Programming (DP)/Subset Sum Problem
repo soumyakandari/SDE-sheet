@@ -1,2 +1,34 @@
 Given an array of non-negative integers, and a value sum, determine if there is a subset of the given set with sum equal to given sum. 
+Input:
+N = 6
+arr[] = {3, 34, 4, 12, 5, 2}
+sum = 9
+Output: 1 
+Explanation: Here there exists a subset with
+sum = 9, 4+3+2 = 9.
+
+T.C- 2^n
+S.C - O(N) ---STACK SPACE
+
+JAVA CODE- (RECURSION)
+class Solution{
+
+
+    static Boolean isSubsetSum(int N, int arr[], int sum){
+        // code here
+      if(sum==0)
+        return true;
+         
+        if(N==0)
+           return false;
+           
+        // if element is gretaer than sum --->sum willl be negative 
+        if(arr[N-1]>sum)
+           isSubsetSum(N-1,arr,sum);
+           
+         return isSubsetSum(N-1,arr,sum) || isSubsetSum(N-1, arr,sum-arr[N-1]);
+           
+        
+    }
+}
 
